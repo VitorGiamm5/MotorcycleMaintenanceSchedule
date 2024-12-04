@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using MotorcycleMaintenanceSchedule.Domain.Entities.Address;
-using MotorcycleMaintenanceSchedule.Domain.Entities.Contacts;
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 
@@ -17,76 +15,22 @@ public class MaintenanceListHandler : IRequestHandler<MaintenanceListParamsQuery
             new ()
             {
                 Id = "1",
-                Name = "a",
+                Name = "John",
                 Observation = "test",
                 SchedulingDate = DateTime.UtcNow,
-                Contacts =  
-                [
-                    new ContactEntity()
-                    {
-                        Id = "1",
-                        Email = "a@a.com",
-                        Name = "Name",
-                        Phone = 11111111,
-                        PhoneDDD = 11,
-                        AdressId = "1",
-                        Adress = new AddressEntity()
-                        {
-                            Id = "1",
-                            CityId = "1",
-                            Number = "1",
-                            Street = "street",
-                            ZipCode = "1",
-                            Neighborhood = "a"
-                        },
-                    }
-                ],
-                Address = new AddressEntity()
-                {
-                    Id = "2",
-                    CityId = "1",
-                    Number = "1",
-                    Street = "street",
-                    ZipCode = "2",
-                    Neighborhood = "a"
-                }
+                Email = "a@a.com",
+                Phone = 11111111,
+                PhoneDDD = 11,
             },
             new ()
             {
-                Id = "1",
-                Name = "a",
+                Id = "2",
+                Name = "Wick",
                 Observation = "test",
                 SchedulingDate = DateTime.UtcNow,
-                Contacts =
-                [
-                    new ContactEntity()
-                    {
-                        Id = "1",
-                        Email = "a@a.com",
-                        Name = "Name",
-                        Phone = 11111111,
-                        PhoneDDD = 11,
-                        AdressId = "1",
-                        Adress = new AddressEntity()
-                        {
-                            Id = "1",
-                            CityId = "1",
-                            Number = "1",
-                            Street = "street",
-                            ZipCode = "1",
-                            Neighborhood = "a"
-                        },
-                    }
-                ],
-                Address = new AddressEntity()
-                {
-                    Id = "2",
-                    CityId = "1",
-                    Number = "1",
-                    Street = "street",
-                    ZipCode = "2",
-                    Neighborhood = "a"
-                }
+                Email = "b@b.com",
+                Phone = 22222222,
+                PhoneDDD = 11,
             }
         });
 

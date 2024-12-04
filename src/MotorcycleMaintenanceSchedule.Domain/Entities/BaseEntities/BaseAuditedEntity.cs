@@ -5,7 +5,7 @@ namespace MotorcycleMaintenanceSchedule.Domain.Entities.BaseEntities;
 public abstract class BaseAuditedEntity
 {
     [JsonIgnore]
-    public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+    public DateTime DateCreated { get; set; } = DateTime.Now;
 
     [JsonIgnore]
     public string CreatedBy { get; set; } = "admin";

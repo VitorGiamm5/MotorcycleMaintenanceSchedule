@@ -1,22 +1,15 @@
-﻿using MotorcycleMaintenanceSchedule.Domain.Entities.Address;
-using MotorcycleMaintenanceSchedule.Domain.Entities.BaseEntities;
-using MotorcycleMaintenanceSchedule.Domain.Entities.Contacts;
+﻿using MotorcycleMaintenanceSchedule.Domain.Entities.BaseEntities;
+using MotorcycleMaintenanceSchedule.Domain.Maintence;
 
 namespace MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 
-public class ScheduleEntity : BaseAuditedEntity
+public class ScheduleEntity : BaseHoursInformation
 {
     public required string Id { get; set; }
     public required string Name { get; set; }
-    public required DateTimeOffset SchedulingDate { get; set; }
+    public required string Email { get; set; }
+    public required int Phone { get; set; }
+    public required int PhoneDDD { get; set; }
     public string? Observation { get; set; }
-
-    #region Relarionships
-
-    public ICollection<ContactEntity>? Contacts { get; set; }
-
-    public string? AddressId { get; set; }
-    public AddressEntity? Address { get; set; }
-
-    #endregion
+    public StatusMaintenanceEnum Status { get; set; } = StatusMaintenanceEnum.AwaitingForSchedule;
 }
