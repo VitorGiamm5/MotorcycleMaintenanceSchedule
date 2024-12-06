@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MotorcycleMaintenanceSchedule.Api.Controllers.BaseController;
-using MotorcycleMaintenanceSchedule.Application.Services.Internal.Maintence.Queries.List;
+using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.List;
+using MotorcycleMaintenanceSchedule.Domain.Schedule;
 
 namespace MotorcycleMaintenanceSchedule.Api.Controllers;
 
@@ -10,11 +11,13 @@ namespace MotorcycleMaintenanceSchedule.Api.Controllers;
 public class ScheduleController(IMediator _mediator) : BaseApiController
 {
     [HttpGet]
-    public async Task<IActionResult> List([FromQuery] MaintenanceListParamsQuery request)
+    public async Task<IActionResult> List([FromQuery] ScheduleListParams request)
     {
         try
         {
-            var result = await _mediator.Send(request);
+            request.OrderBy ??= ScheduleOrderByEnum.DateCreated;
+
+            var result = await _mediator.Send(new ScheduleListParamsQuery(request));
 
             return Response(result);
         }

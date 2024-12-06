@@ -10,8 +10,18 @@ namespace MotorcycleMaintenanceSchedule.Api.Controllers.BaseController;
 [Consumes("application/json")]
 public class BaseApiController : ControllerBase
 {
+    protected new IActionResult Response(object? result)
+    {
+        return StatusCode((int)HttpStatusCode.NotFound);
+    }
+
     protected new IActionResult Response(ActionResult response)
     {
+        if (response is null)
+        {
+            return StatusCode((int)HttpStatusCode.NotFound);
+        }
+
         var data = response.GetData();
 
         if (response.HasError())
@@ -33,12 +43,5 @@ public class BaseApiController : ControllerBase
         apiResponse.SetError(CommomMessagesConst.MESSAGE_INVALID_DATA, exception);
 
         return StatusCode((int)HttpStatusCode.InternalServerError, apiResponse);
-    }
-
-    public static string IdBuild(string? id)
-    {
-        var result = string.IsNullOrEmpty(id) ? Ulid.NewUlid().ToString() : id;
-
-        return result;
     }
 }

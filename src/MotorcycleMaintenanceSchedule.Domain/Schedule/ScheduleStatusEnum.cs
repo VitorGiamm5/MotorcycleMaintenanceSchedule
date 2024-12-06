@@ -1,6 +1,6 @@
-﻿namespace MotorcycleMaintenanceSchedule.Domain.Maintence;
+﻿namespace MotorcycleMaintenanceSchedule.Domain.Schedule;
 
-public enum StatusMaintenanceEnum
+public enum ScheduleStatusEnum
 {
     AwaitingForSchedule = 0,
     Completed = 1,

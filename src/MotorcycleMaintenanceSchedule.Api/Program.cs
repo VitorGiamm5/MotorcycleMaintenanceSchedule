@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using MotorcycleMaintenanceSchedule.Api.Converters;
 using MotorcycleMaintenanceSchedule.Api.Swagger;
 using MotorcycleMaintenanceSchedule.Application;
+using MotorcycleMaintenanceSchedule.Infrastructure.Database.Services;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,7 +48,8 @@ builder.Services.AddApplication(builder.Configuration);
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenAnyIP(5273);
+    var kestrelPort = builder.Configuration.GetValue<int>("Kestrel:Port", 5000);
+    options.ListenAnyIP(kestrelPort);
 });
 
 var app = builder.Build();
@@ -57,12 +59,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    //ExecutePendingMigration.Execute(builder.Services);
+    ExecutePendingMigration.Execute(builder.Services);
 }
 
 app.MapControllers().WithMetadata(new RouteAttribute("api/[controller]"));
 
-    app.Run();
+app.UseAuthorization();
 
-
-//app.UseAuthorization();
+app.Run();
