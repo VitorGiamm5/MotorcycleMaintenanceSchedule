@@ -48,7 +48,7 @@ services:
       - RabbitMQ__Port=5672
       - RabbitMQ__QueuesName__MaintenanceSchedulPublishQueue=maintenance-schedule-notification-queue
       - RabbitMQ__QueuesName__MaintenanceSchedulConsumerQueue=maintenance-schedule-notification-queue
-      - ConnectionStrings__Postgres=Server=91612379773_postgres; Port=5432; Database=dbmaintenanceschedule; User ID=randandan; Password=randandan_XLR;
+      - ConnectionStrings__Postgres=Server=91612379773_postgres; Port=5432; Database=dbgodelivery; User ID=randandan; Password=randandan_XLR;
     depends_on:
       - 91612379773_postgres
       - 91612379773_rabbitmq
