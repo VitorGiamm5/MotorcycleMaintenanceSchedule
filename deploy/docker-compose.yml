@@ -1,0 +1,62 @@
+networks:
+  91612379773_webnet:
+    driver: bridge
+
+services:
+  91612379773_postgres:
+    image: postgres:16.4
+    container_name: 91612379773_postgres
+    environment:
+      POSTGRES_USER: randandan
+      POSTGRES_PASSWORD: randandan_XLR
+      POSTGRES_DB: dbmaintenanceschedule
+    ports:
+      - "9000:5432" # Mapeando porta padrão do PostgreSQL
+    volumes:
+      - 91612379773_pgdata:/var/lib/postgresql/data
+    networks:
+      - 91612379773_webnet
+
+  91612379773_rabbitmq:
+    image: rabbitmq:3-management
+    container_name: 91612379773_rabbitmq
+    ports:
+      - "9001:5672"  # Porta AMQP
+      - "9002:15672" # Porta da interface de gerenciamento
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - 91612379773_rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - 91612379773_webnet
+
+  41864645926_api_maintenanceschedule:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: 41864645926_api_maintenanceschedule
+    ports:
+      - "9103:9103"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Kestrel__Port=9103
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - RabbitMQ__Host=91612379773_rabbitmq
+      - RabbitMQ__Username=guest
+      - RabbitMQ__Password=guest
+      - RabbitMQ__Port=5672
+      - RabbitMQ__QueuesName__MaintenanceSchedulPublishQueue=maintenance-schedule-notification-queue
+      - RabbitMQ__QueuesName__MaintenanceSchedulConsumerQueue=maintenance-schedule-notification-queue
+      - ConnectionStrings__Postgres=Server=91612379773_postgres; Port=5432; Database=dbmaintenanceschedule; User ID=randandan; Password=randandan_XLR;
+    depends_on:
+      - 91612379773_postgres
+      - 91612379773_rabbitmq
+    entrypoint: ["dotnet", "MotorcycleMaintenanceSchedule.Api.dll"]
+    networks:
+      - 91612379773_webnet
+
+volumes:
+  91612379773_pgdata:
+  91612379773_rabbitmq_data:
+  91612379773_minio_data:

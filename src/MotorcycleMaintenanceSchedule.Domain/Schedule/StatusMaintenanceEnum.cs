@@ -1,4 +1,4 @@
-﻿namespace MotorcycleMaintenanceSchedule.Domain.Maintence;
+﻿namespace MotorcycleMaintenanceSchedule.Domain.Schedule;
 
 public enum StatusMaintenanceEnum
 {

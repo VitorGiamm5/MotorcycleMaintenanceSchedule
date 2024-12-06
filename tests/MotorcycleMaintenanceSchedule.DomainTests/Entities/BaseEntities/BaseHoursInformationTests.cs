@@ -14,7 +14,7 @@ public static class BaseHoursInformationTests
         {
             StartBusinessHour = DateTimeOffset.Parse("2024-12-04T08:00:00Z"),
             EndBusinessHour = DateTimeOffset.Parse("2024-12-04T18:00:00Z"),
-            SchedulingDate = DateTimeOffset.Parse("2024-12-04T15:30:00Z")
+            ScheduleDate = DateTimeOffset.Parse("2024-12-04T15:30:00Z")
         };
 
         // Act
@@ -32,7 +32,7 @@ public static class BaseHoursInformationTests
         {
             StartBusinessHour = DateTimeOffset.Parse("2024-12-04T08:00:00Z"),
             EndBusinessHour = DateTimeOffset.Parse("2024-12-04T18:00:00Z"),
-            SchedulingDate = DateTimeOffset.Parse("2024-12-04T07:59:00Z")
+            ScheduleDate = DateTimeOffset.Parse("2024-12-04T07:59:00Z")
         };
 
         // Act

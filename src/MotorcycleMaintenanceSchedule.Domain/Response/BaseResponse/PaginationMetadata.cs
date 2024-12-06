@@ -2,11 +2,6 @@
 
 public class PaginationMetadata
 {
-    public int CurrentPage { get; set; }
-    public int PageSize { get; set; }
-    public int TotalRecords { get; set; }
-    public int TotalPages { get; set; }
-
     public PaginationMetadata(int currentPage, int pageSize, int totalRecords)
     {
         CurrentPage = currentPage;
@@ -14,4 +9,9 @@ public class PaginationMetadata
         TotalRecords = totalRecords;
         TotalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
     }
+
+    public int CurrentPage { get; set; }
+    public int PageSize { get; set; }
+    public int TotalRecords { get; set; }
+    public int TotalPages { get; set; }
 }
