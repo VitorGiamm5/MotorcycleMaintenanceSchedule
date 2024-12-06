@@ -11,7 +11,7 @@ public class ScheduleListHandler : IRequestHandler<ScheduleListParamsQuery, Acti
     {
         var apiReponse = new ActionResult();
 
-        apiReponse.SetData(new List<ScheduleEntity>
+        var result = new List<ScheduleEntity>
         {
             new ()
             {
@@ -19,9 +19,12 @@ public class ScheduleListHandler : IRequestHandler<ScheduleListParamsQuery, Acti
                 Name = "John",
                 Observation = "test",
                 Email = "a@a.com",
-                Status = StatusMaintenanceEnum.AwaitingForSchedule,
+                Status = ScheduleStatusEnum.AwaitingForSchedule,
                 Phone = 11111111,
                 PhoneDDD = 11,
+                CreatedBy = "admin",
+                DateCreated = DateTime.UtcNow,
+                DateLastUpdate = DateTime.UtcNow,
             },
             new ()
             {
@@ -30,13 +33,18 @@ public class ScheduleListHandler : IRequestHandler<ScheduleListParamsQuery, Acti
                 Observation = "test",
                 ScheduleDate = DateTime.UtcNow,
                 Email = "b@b.com",
-                Status = StatusMaintenanceEnum.InProgress,
+                Status = ScheduleStatusEnum.InProgress,
                 Phone = 22222222,
                 PhoneDDD = 11,
+                CreatedBy = "admin",
+                DateCreated = DateTime.UtcNow,
+                DateLastUpdate = DateTime.UtcNow,
             }
-        });
+        };
 
-        apiReponse.SetPaginationMetadata(currentPage: 1, pageSize: 100, totalRecords: 2);
+        apiReponse.SetData(result);
+
+        apiReponse.SetPaginationMetadata(currentPage: (int)request.PageNumber!, pageSize: (int)request.PageSize!, totalRecords: result.Count);
 
         return apiReponse;
     }

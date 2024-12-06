@@ -4,12 +4,12 @@ namespace MotorcycleMaintenanceSchedule.Domain.Entities.BaseEntities;
 
 public class BaseAuditedEntity
 {
-    [JsonIgnore]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public DateTime DateCreated { get; set; } = DateTime.Now;
 
-    [JsonIgnore]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public string CreatedBy { get; set; } = "admin";
 
-    [JsonIgnore]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public DateTime? DateLastUpdate { get; set; }
 }

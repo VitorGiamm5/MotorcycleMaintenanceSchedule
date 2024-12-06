@@ -7,6 +7,5 @@ public enum ScheduleSearchFieldEnum
     Email,
     Phone,
     PhoneDDD,
-    MotorcycleId,
-    ScheduleDate
+    MotorcycleId
 }

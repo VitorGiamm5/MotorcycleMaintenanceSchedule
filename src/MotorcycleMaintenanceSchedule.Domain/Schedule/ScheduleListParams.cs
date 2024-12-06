@@ -1,12 +1,14 @@
-﻿namespace MotorcycleMaintenanceSchedule.Domain.Schedule;
+﻿using MotorcycleMaintenanceSchedule.Domain.Request.BaseRequest;
 
-public class ScheduleListParams
+namespace MotorcycleMaintenanceSchedule.Domain.Schedule;
+
+public class ScheduleListParams : BaseQueryParams
 {
-    public int Limit { get; set; }
-    public int Page { get; set; }
-    public ScheduleOrderByEnum OrderBy { get; set; }
-    public bool Ascending { get; set; }
-    public StatusMaintenanceEnum? Status { get; set; }
+    public ScheduleOrderByEnum? OrderBy { get; set; }
+    public ScheduleStatusEnum? Status { get; set; }
     public ScheduleSearchFieldEnum? SearchField { get; set; }
     public string? SearchValue { get; set; }
+
+    public DateTime? ScheduleDateStart { get; set; }
+    public DateTime? ScheduleDateEnd { get; set; }
 }

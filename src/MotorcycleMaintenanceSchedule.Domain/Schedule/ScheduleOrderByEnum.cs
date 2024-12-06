@@ -2,6 +2,7 @@
 
 public enum ScheduleOrderByEnum
 {
+    Name,
     Phone,
     PhoneDDD,
     Status,

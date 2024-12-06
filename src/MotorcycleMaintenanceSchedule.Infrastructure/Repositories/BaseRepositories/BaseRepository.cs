@@ -1,4 +1,4 @@
-﻿using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
+﻿using Microsoft.EntityFrameworkCore;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
 
 namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.BaseRepositories;
@@ -12,28 +12,62 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
         _context = context;
     }
 
-    public Task<T> Create(T entity)
+    public async Task<T> Create(T entity)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().Add(entity)
+            .State = EntityState.Added;
+
+        await _context.SaveChangesAsync();
+        return entity;
     }
 
-    public Task<T> Delete(int? id)
+    public async Task<T> Delete(int? id)
     {
-        throw new NotImplementedException();
+        if (id == null)
+        {
+            throw new ArgumentNullException(nameof(id));
+        }
+
+        var entity = await _context.Set<T>()
+            .FindAsync(id);
+
+        if (entity == null)
+        {
+            throw new KeyNotFoundException($"Entity with id {id} not found.");
+        }
+
+        _context.Set<T>().Remove(entity).State = EntityState.Deleted;
+
+        await _context.SaveChangesAsync();
+
+        return entity;
     }
 
-    public Task<T> GetById(int? id)
+    public async Task<T> GetById(int? id)
     {
-        throw new NotImplementedException();
-    }
+        if (id == null)
+        {
+            throw new ArgumentNullException(nameof(id));
+        }
 
-    public Task<PaginatedResult<T>> List(object? queryParams)
-    {
-        throw new NotImplementedException();
-    }
+        var entity = await _context
+            .Set<T>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
 
-    public Task<T> Update(T entity)
+        if (entity == null)
+        {
+            throw new KeyNotFoundException($"Entity with id {id} not found.");
+        }
+
+        return entity;
+    }
+    public async Task<T> Update(T entity)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().Update(entity)
+            .State = EntityState.Modified;
+
+        await _context.SaveChangesAsync();
+        return entity;
     }
 }

@@ -7,7 +7,6 @@ namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.BaseReposito
 
 public interface IBaseRepository<T> where T : class
 {
-    Task<PaginatedResult<T>> List(object? queryParams);
     Task<T> GetById(int? id);
     Task<T> Create(T entity);
     Task<T> Update(T entity);

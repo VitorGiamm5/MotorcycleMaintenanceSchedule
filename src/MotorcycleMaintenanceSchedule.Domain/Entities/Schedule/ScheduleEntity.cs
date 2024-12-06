@@ -11,6 +11,6 @@ public class ScheduleEntity : BaseHoursInformation
     public int? Phone { get; set; }
     public int? PhoneDDD { get; set; }
     public string? Observation { get; set; }
-    public StatusMaintenanceEnum Status { get; set; }
+    public ScheduleStatusEnum Status { get; set; }
     public string? MotorcycleId { get; set; }
 }
