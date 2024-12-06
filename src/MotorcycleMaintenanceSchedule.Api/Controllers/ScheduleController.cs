@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MotorcycleMaintenanceSchedule.Api.Controllers.BaseController;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.List;
-using MotorcycleMaintenanceSchedule.Domain.Request.BaseRequest;
 using MotorcycleMaintenanceSchedule.Domain.Schedule;
 
 namespace MotorcycleMaintenanceSchedule.Api.Controllers;
