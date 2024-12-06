@@ -2,9 +2,10 @@
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 using MotorcycleMaintenanceSchedule.Domain.Schedule;
 
-namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule;
+namespace MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 
 public interface IScheduleListRepository
 {
     Task<PaginatedResult<ScheduleEntity>> List(ScheduleListParams queryParams);
+    Task<PaginatedResult<ScheduleEntity>> ListAll();
 }

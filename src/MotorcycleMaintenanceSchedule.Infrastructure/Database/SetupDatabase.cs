@@ -25,7 +25,7 @@ public static class SetupDatabase
             .EnableDetailedErrors()
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
             .UseNpgsql(dataSourceBuilder.Build(), b => b
-                .MigrationsHistoryTable("__EFMigrationsHistory", "maintenceschedule")
+                .MigrationsHistoryTable("__EFMigrationsHistory", "dbmaintenanceschedule")
                 .MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
             );
 

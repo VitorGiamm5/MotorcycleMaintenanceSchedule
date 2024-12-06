@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using MotorcycleMaintenanceSchedule.Api.Converters;
 using MotorcycleMaintenanceSchedule.Api.Swagger;
 using MotorcycleMaintenanceSchedule.Application;
+using MotorcycleMaintenanceSchedule.Infrastructure.Database.Services;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,7 +59,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    //ExecutePendingMigration.Execute(builder.Services);
+    ExecutePendingMigration.Execute(builder.Services);
 }
 
 app.MapControllers().WithMetadata(new RouteAttribute("api/[controller]"));

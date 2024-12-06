@@ -8,7 +8,7 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<ScheduleEntity>
 {
     public void Configure(EntityTypeBuilder<ScheduleEntity> entity)
     {
-        entity.ToTable("tb_motorcycleMaintenanceSchedule");
+        entity.ToTable("tb_schedule");
 
         entity.HasKey(t => t.Id);
 

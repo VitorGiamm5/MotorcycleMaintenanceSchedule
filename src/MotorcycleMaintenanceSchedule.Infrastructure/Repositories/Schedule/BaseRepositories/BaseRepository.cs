@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule.BaseRepositories;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
 
-namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.BaseRepositories;
+namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule.BaseRepositories;
 
-public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
+public class BaseRepository<T> : IBaseRepository<T> where T : class
 {
     public readonly ApplicationDbContext _context;
 
@@ -18,14 +19,15 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
             .State = EntityState.Added;
 
         await _context.SaveChangesAsync();
+
         return entity;
     }
 
-    public async Task<T> Delete(int? id)
+    public async Task<T> Delete(string? id)
     {
-        if (id == null)
+        if (string.IsNullOrEmpty(id) || id == ":id")
         {
-            throw new ArgumentNullException(nameof(id));
+            return Activator.CreateInstance<T>();
         }
 
         var entity = await _context.Set<T>()
@@ -33,7 +35,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 
         if (entity == null)
         {
-            throw new KeyNotFoundException($"Entity with id {id} not found.");
+            return Activator.CreateInstance<T>();
         }
 
         _context.Set<T>().Remove(entity).State = EntityState.Deleted;
@@ -43,24 +45,19 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
         return entity;
     }
 
-    public async Task<T> GetById(int? id)
+    public async Task<T> GetById(string? id)
     {
-        if (id == null)
+        if (string.IsNullOrEmpty(id) || id == ":id")
         {
-            throw new ArgumentNullException(nameof(id));
+            return Activator.CreateInstance<T>();
         }
 
         var entity = await _context
             .Set<T>()
             .AsNoTracking()
-            .FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
+            .FirstOrDefaultAsync(e => EF.Property<string>(e, "Id") == id);
 
-        if (entity == null)
-        {
-            throw new KeyNotFoundException($"Entity with id {id} not found.");
-        }
-
-        return entity;
+        return entity ?? Activator.CreateInstance<T>();
     }
     public async Task<T> Update(T entity)
     {

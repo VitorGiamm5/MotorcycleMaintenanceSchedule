@@ -32,7 +32,7 @@ Observação:
 $ docker ps -a
 
 7. Executar as migrations (esteja com seu terminal na raíz do projeto "c:/Projetos/CoreGoDelivery")
-$ dotnet ef database update -s src\CoreGoDelivery.Api -p src\CoreGoDelivery.Infrastructure
+$ dotnet ef database update -s src\MotorcycleMaintenanceSchedule.Api -p src\MotorcycleMaintenanceSchedule.Infrastructure
 
 8. Para conectar o Banco recomenda-se usar o DBeaver, para facilitar a importação de dados que serão necessários!
 
@@ -49,10 +49,10 @@ Para os end-points que necessitam de imagem base64, elas estão disponíveis na 
 Caso modifique alguma entidade, esse é o comando para criar a migration
 
 Gerar migration, considere abrir o Powershell na pasta raiz do projeto: 
-$ dotnet ef migrations add InicialBase -s src\CoreGoDelivery.Api -p src\CoreGoDelivery.Infrastructure
+$ dotnet ef migrations add InicialBase -s src\MotorcycleMaintenanceSchedule.Api -p src\MotorcycleMaintenanceSchedule.Infrastructure
 
 Atualizar o banco:
-$ dotnet ef database update -s .\CoreGoDelivery.Api -p .\CoreGoDelivery.Infrastructure
+$ dotnet ef database update -s .\MotorcycleMaintenanceSchedule.Api -p .\MotorcycleMaintenanceSchedule.Infrastructure
 
 Referências:
 

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
+using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 using MotorcycleMaintenanceSchedule.Domain.Schedule;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
-using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.BaseRepositories;
+using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule.BaseRepositories;
 
 namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule;
 
@@ -13,9 +14,29 @@ public class ScheduleListRepository : BaseRepository<ScheduleEntity>, IScheduleL
     {
     }
 
+    public async Task<PaginatedResult<ScheduleEntity>> ListAll()
+    {
+        var query = _context.Set<ScheduleEntity>().AsQueryable();
+
+        var items = await query.ToListAsync() ?? [];
+
+        var result = new PaginatedResult<ScheduleEntity>()
+        {
+            Items = items,
+            Pagination = new PaginationMetadata(
+                currentPage: 1,
+                pageSize: 100000,
+                totalRecords: items.Count)
+        };
+
+        return result;
+    }
+
     public async Task<PaginatedResult<ScheduleEntity>> List(ScheduleListParams queryParams)
     {
         var query = _context.Set<ScheduleEntity>().AsQueryable();
+
+        var totalRecords = await query.CountAsync();
 
         if (queryParams.Status.HasValue)
         {
@@ -64,8 +85,6 @@ public class ScheduleListRepository : BaseRepository<ScheduleEntity>, IScheduleL
             query = query.Skip((queryParams.PageNumber.Value - 1) * queryParams.PageSize.Value)
                          .Take(queryParams.PageSize.Value);
         }
-
-        var totalRecords = await query.CountAsync();
 
         var items = await query.ToListAsync() ?? [];
 
