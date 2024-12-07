@@ -48,8 +48,18 @@ builder.Services.AddApplication(builder.Configuration);
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    var kestrelPort = builder.Configuration.GetValue<int>("Kestrel:Port", 5000);
+    int kestrelPort = builder.Configuration.GetValue<int>("Kestrel:Port", 5000);
     options.ListenAnyIP(kestrelPort);
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
 });
 
 var app = builder.Build();
@@ -62,8 +72,12 @@ if (app.Environment.IsDevelopment())
     ExecutePendingMigration.Execute(builder.Services);
 }
 
-app.MapControllers().WithMetadata(new RouteAttribute("api/[controller]"));
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowAll");
+
+app.MapControllers().WithMetadata(new RouteAttribute("api/[controller]"));
 
 app.Run();
