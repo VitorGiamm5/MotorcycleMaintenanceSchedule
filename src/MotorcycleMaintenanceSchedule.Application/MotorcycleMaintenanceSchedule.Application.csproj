@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Internal\Schedule\Commands\Create\" />
-    <Folder Include="Services\Internal\Schedule\Commands\Delete\" />
-    <Folder Include="Services\Internal\Schedule\Commands\UpdateStatus\" />
     <Folder Include="Services\Internal\Schedule\Queries\GetOne\" />
   </ItemGroup>
 

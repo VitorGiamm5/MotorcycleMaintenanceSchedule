@@ -1,11 +1,13 @@
 ﻿using MotorcycleMaintenanceSchedule.Domain.Entities.BaseEntities;
 using MotorcycleMaintenanceSchedule.Domain.Schedule;
+using System.Text.Json.Serialization;
 
 namespace MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 
 public class ScheduleEntity : BaseHoursInformation
 {
-    public required string Id { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public string? Id { get; set; }
     public required string Name { get; set; }
     public string? Email { get; set; }
     public int? Phone { get; set; }
