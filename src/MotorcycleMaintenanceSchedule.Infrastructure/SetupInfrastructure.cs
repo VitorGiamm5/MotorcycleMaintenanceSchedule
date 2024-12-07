@@ -8,6 +8,7 @@ using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule.BaseRepositories;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
 using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule;
+using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule.BaseRepositories;
 using Polly;
 using Polly.Retry;
 
@@ -46,6 +47,8 @@ public static class SetupInfrastructure
     private static void AddRepositories(IServiceCollection services)
     {
         services.TryAddScoped<IScheduleListRepository, ScheduleListRepository>();
+        services.TryAddScoped<IScheduleRepository, ScheduleRepository>();
+
         services.TryAddScoped<IBaseRepository<ScheduleEntity>, ScheduleListRepository>();
     }
 }

@@ -39,6 +39,8 @@ services:
     ports:
       - "9103:9103"
     environment:
+      - AllowSpecificOrigin=http://localhost:5173
+      - AllowSpecificMethods=GET,POST,PUT,DELETE
       - ASPNETCORE_ENVIRONMENT=Production
       - Kestrel__Port=9103
       - DOTNET_RUNNING_IN_CONTAINER=true
@@ -59,4 +61,3 @@ services:
 volumes:
   91612379773_pgdata:
   91612379773_rabbitmq_data:
-  91612379773_minio_data:

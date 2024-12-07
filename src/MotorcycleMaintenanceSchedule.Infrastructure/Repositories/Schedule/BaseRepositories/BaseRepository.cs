@@ -4,7 +4,7 @@ using MotorcycleMaintenanceSchedule.Infrastructure.Database;
 
 namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule.BaseRepositories;
 
-public class BaseRepository<T> : IBaseRepository<T> where T : class
+public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 {
     public readonly ApplicationDbContext _context;
 
