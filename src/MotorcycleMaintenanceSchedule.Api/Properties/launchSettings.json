@@ -1,14 +1,27 @@
 ﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "http": {
+    "MotorcycleMaintenanceSchedule.Api": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5047",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:9103"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "environmentVariables": {
+        "UseInMemoryDatabase": "false",
+        "ASPNETCORE_HTTPS_PORT": "9103",
+        "ASPNETCORE_URLS": "https://+:9103;http://+:9010"
+      },
+      "useSSL": true,
+      "httpPort": 9110,
+      "sslPort": 9111
     }
   }
 }

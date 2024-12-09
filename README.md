@@ -38,34 +38,30 @@ $ dotnet ef database update -s src\MotorcycleMaintenanceSchedule.Api -p src\Moto
 
 Host: localhost
 Port: 9000
-Bando de dados: dbgodelivery
+Bando de dados: dbmaintenanceschedule
 Nome de usuário: randandan
 Senha: randandan_XLR
 
-Notas e dicas de uso:
-
-Para os end-points que necessitam de imagem base64, elas estão disponíveis na pasta "Assets" e então na pasta "ImageCNH", nela contém uma imagem .png e uma .bmp e de brinde, arquivos de texto com as imagens já em base64!
-
-Caso modifique alguma entidade, esse é o comando para criar a migration
+Certifique-se de possuir o EF instalado localmente 
+$ dotnet tool install --global dotnet-ef
 
 Gerar migration, considere abrir o Powershell na pasta raiz do projeto: 
 $ dotnet ef migrations add InicialBase -s src\MotorcycleMaintenanceSchedule.Api -p src\MotorcycleMaintenanceSchedule.Infrastructure
 
 Atualizar o banco:
-$ dotnet ef database update -s .\MotorcycleMaintenanceSchedule.Api -p .\MotorcycleMaintenanceSchedule.Infrastructure
+$ dotnet ef database update -s src\MotorcycleMaintenanceSchedule.Api -p src\MotorcycleMaintenanceSchedule.Infrastructure
 
 Referências:
 
-- Validador de documentos
-https://www.nuget.org/packages/DocsBRValidator
-
 - Página administrativa do RabbitMQ
-http://localhost:15672/#/
+http://localhost:9002/#/
 
-Serviço	        Porta Interna	Porta Externa	Observação
-PostgreSQL	    5432	        9000	        Porta padrão do PostgreSQL
-RabbitMQ (AMQP)	5672	        9001	        Porta para o protocolo AMQP
-RabbitMQ (UI)	15672	        9002	        Porta para a interface de UI
-MinIO (API)	    9000	        9003	        Porta da API do MinIO
-MinIO (Console)	9001	        9004	        Porta do console do MinIO
-CoreGoDelivery	80	            9005	        Porta da aplicação principal
+Serviço							Porta Interna	Porta Externa	Observação
+PostgreSQL						5432	        9000	        Porta padrão do PostgreSQL
+RabbitMQ (AMQP)					5672	        9001	        Porta para o protocolo AMQP
+RabbitMQ (UI)					15672	        9002	        Porta para a interface de UI
+MinIO (API)						9000	        9003	        Porta da API do MinIO
+MinIO (Console)					9001	        9004	        Porta do console do MinIO
+CoreGoDelivery					9005            9005	        Porta da aplicação
+MotorcycleMaintenanceSchedule	9103            9103	        Porta da aplicação principal
+

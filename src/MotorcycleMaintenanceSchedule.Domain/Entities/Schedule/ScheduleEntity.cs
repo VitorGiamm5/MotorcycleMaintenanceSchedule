@@ -1,5 +1,5 @@
 ﻿using MotorcycleMaintenanceSchedule.Domain.Entities.BaseEntities;
-using MotorcycleMaintenanceSchedule.Domain.Schedule;
+using MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
 using System.Text.Json.Serialization;
 
 namespace MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;

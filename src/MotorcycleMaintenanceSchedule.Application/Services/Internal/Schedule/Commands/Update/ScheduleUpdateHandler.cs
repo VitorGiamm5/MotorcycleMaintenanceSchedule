@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MotorcycleMaintenanceSchedule.Domain.Exceptions;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 
@@ -20,9 +21,11 @@ public class ScheduleUpdateHandler : IRequestHandler<ScheduleUpdateCommand, Acti
         try
         {
             var schedule = await _scheduleRepository.GetById(request.Id);
+
             if (schedule == null)
             {
-                result.SetError("Schedule not found");
+                result.SetError("Schedule", FaultMessagesConst.MESSAGE_ERROR_NOT_FOUND);
+
                 return result;
             }
 
@@ -33,9 +36,8 @@ public class ScheduleUpdateHandler : IRequestHandler<ScheduleUpdateCommand, Acti
             schedule.Observation = request.Observation;
             schedule.Status = request.Status;
             schedule.MotorcycleId = request.MotorcycleId;
-            schedule.StartBusinessHour = request.StartBusinessHour;
+            schedule.StartBusinessHour = schedule.StartBusinessHour;
             schedule.EndBusinessHour = request.EndBusinessHour;
-            schedule.ScheduleDate = request.ScheduleDate;
             schedule.DateLastUpdate = DateTime.UtcNow;
 
             await _scheduleRepository.Update(schedule);

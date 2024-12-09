@@ -1,4 +1,4 @@
-﻿namespace MotorcycleMaintenanceSchedule.Domain.Schedule;
+﻿namespace MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
 
 public enum ScheduleStatusEnum
 {

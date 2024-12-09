@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MotorcycleMaintenanceSchedule.Domain.Exceptions;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 using System.Net;
+using System.Runtime.Serialization;
 using ActionResult = MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse.ActionResult;
 
 namespace MotorcycleMaintenanceSchedule.Api.Controllers.BaseController;
@@ -10,38 +13,23 @@ namespace MotorcycleMaintenanceSchedule.Api.Controllers.BaseController;
 [Consumes("application/json")]
 public class BaseApiController : ControllerBase
 {
-    protected new IActionResult Response(object? result)
-    {
-        return StatusCode((int)HttpStatusCode.NotFound);
-    }
-
     protected new IActionResult Response(ActionResult response)
     {
-        if (response is null)
-        {
-            return StatusCode((int)HttpStatusCode.NotFound);
-        }
-
-        var data = response.GetData();
-
         if (response.HasError())
         {
-            return StatusCode((int)HttpStatusCode.BadRequest, response.GetError());
+            return BadRequest(response.GetError());
         }
-        else if (response.HasData())
+
+        if (response is null || !response.HasData())
         {
-            return StatusCode((int)HttpStatusCode.OK, data);
+            return Created();
         }
 
-        return StatusCode((int)HttpStatusCode.NotFound);
-    }
+        if (response.HasData())
+        {
+            return Ok(response.GetData());
+        }
 
-    protected IActionResult ResponseError(object exception)
-    {
-        var apiResponse = new ActionResult();
-
-        apiResponse.SetError(CommomMessagesConst.MESSAGE_INVALID_DATA, exception);
-
-        return StatusCode((int)HttpStatusCode.InternalServerError, apiResponse);
+        return NoContent();
     }
 }

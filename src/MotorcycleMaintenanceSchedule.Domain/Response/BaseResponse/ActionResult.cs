@@ -1,5 +1,4 @@
-﻿using System.Text;
-
+﻿
 namespace MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 
 public sealed class ActionResult
@@ -8,7 +7,7 @@ public sealed class ActionResult
 
     private PaginationMetadata? Pagination { get; set; }
 
-    private ErrorDetails? Error { get; set; } = null;
+    private List<ErrorDetails>? Error { get; set; } = [];
 
     public class ErrorDetails
     {
@@ -18,7 +17,7 @@ public sealed class ActionResult
 
     public bool HasError()
     {
-        return !string.IsNullOrWhiteSpace(Error?.Message) || Error?.Details != null;
+        return Error?.Count != 0;
     }
 
     public bool HasData()
@@ -28,12 +27,11 @@ public sealed class ActionResult
 
     public void SetError(object message, object? details = null)
     {
-        Data = null;
-        Error = new ErrorDetails
+        Error?.Add(new ErrorDetails
         {
-            Message = message is StringBuilder sb ? sb.ToString() : message?.ToString(),
+            Message = message?.ToString(),
             Details = details
-        };
+        });
     }
 
     public void SetData(object data)
@@ -55,7 +53,7 @@ public sealed class ActionResult
         };
     }
 
-    public object GetError()
+    public object? GetError()
     {
         return new
         {

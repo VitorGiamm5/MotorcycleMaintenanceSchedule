@@ -1,9 +1,7 @@
 ﻿using MediatR;
-using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
-using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule.BaseRepositories;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
-using MotorcycleMaintenanceSchedule.Domain.Schedule;
+using MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
 
 namespace MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.List;
 
@@ -12,9 +10,7 @@ public class ScheduleListHandler : IRequestHandler<ScheduleListParamsQuery, Acti
     private readonly IScheduleListRepository _scheduleListRepository;
 
     public ScheduleListHandler(
-        IScheduleListRepository scheduleListRepository, 
-        IBaseRepository<ScheduleEntity> baseRepository
-        )
+        IScheduleListRepository scheduleListRepository)
     {
         _scheduleListRepository = scheduleListRepository;
     }

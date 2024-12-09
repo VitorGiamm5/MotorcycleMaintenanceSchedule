@@ -22,12 +22,12 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<ScheduleEntity>
         entity.Property(t => t.MotorcycleId).HasColumnName("ID_FK_MOTORCYCLE").IsRequired(false);
 
         entity.Property(t => t.Observation).HasColumnName("OBSERVATION").IsRequired(false);
-        entity.Property(t => t.ScheduleDate).HasColumnName("DATE_SCHEDULE").IsRequired(false).HasColumnType("timestamptz");
-        entity.Property(t => t.StartBusinessHour).HasColumnName("DATE_START_BUSINESS").IsRequired(false).HasColumnType("timestamptz");
-        entity.Property(t => t.EndBusinessHour).HasColumnName("DATE_END_BUSINESS").IsRequired(false).HasColumnType("timestamptz");
+        entity.Property(t => t.ScheduleDate).HasColumnName("DATE_SCHEDULE").HasColumnType("timestamptz").IsRequired(false);
+        entity.Property(t => t.StartBusinessHour).HasColumnName("DATE_START_BUSINESS").HasColumnType("timestamptz").IsRequired(false);
+        entity.Property(t => t.EndBusinessHour).HasColumnName("DATE_END_BUSINESS").HasColumnType("timestamptz").IsRequired(false);
 
         entity.Property(t => t.DateCreated).HasColumnName("DATE_CREATED").IsRequired().HasColumnType("timestamptz");
         entity.Property(t => t.CreatedBy).HasColumnName("CREATED_BY").IsRequired();
-        entity.Property(t => t.DateLastUpdate).HasColumnName("DATE_LAST_UPDATE").IsRequired(false).HasColumnType("timestamptz");
+        entity.Property(t => t.DateLastUpdate).HasColumnName("DATE_LAST_UPDATE").HasColumnType("timestamptz").IsRequired(false);
     }
 }

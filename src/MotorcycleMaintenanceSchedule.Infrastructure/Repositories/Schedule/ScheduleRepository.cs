@@ -1,7 +1,7 @@
 ﻿using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
-using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule.BaseRepositories;
+using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.BaseRepositories;
 
 namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule;
 

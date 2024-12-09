@@ -22,12 +22,11 @@ public class ScheduleDeleteHandler : IRequestHandler<ScheduleDeleteCommand, Acti
             var schedule = await _scheduleRepository.GetById(request.Id);
             if (schedule == null)
             {
-                result.SetError("Schedule not found");
+                result.SetError("Schedule", FaultMessagesConst.MESSAGE_ERROR_NOT_FOUND);
                 return result;
             }
 
             await _scheduleRepository.Delete(request.Id);
-            result.SetData("Schedule deleted successfully");
         }
         catch (Exception ex)
         {
