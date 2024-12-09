@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:9005"
+      "applicationUrl": "http://localhost:9103"
     },
     "Docker": {
       "commandName": "Docker",
@@ -16,12 +16,12 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "environmentVariables": {
         "UseInMemoryDatabase": "false",
-        "ASPNETCORE_HTTPS_PORT": "9011",
-        "ASPNETCORE_URLS": "https://+:9011;http://+:9010"
+        "ASPNETCORE_HTTPS_PORT": "9103",
+        "ASPNETCORE_URLS": "https://+:9103;http://+:9010"
       },
       "useSSL": true,
-      "httpPort": 9010,
-      "sslPort": 9011
+      "httpPort": 9110,
+      "sslPort": 9111
     }
   }
 }

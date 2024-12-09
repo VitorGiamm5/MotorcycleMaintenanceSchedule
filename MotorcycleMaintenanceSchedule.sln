@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorcycleMaintenanceSchedule.Api", "src\MotorcycleMaintenanceSchedule.Api\MotorcycleMaintenanceSchedule.Api.csproj", "{181D539D-E5FA-4F73-A9DE-F0CDEE828DEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotorcycleMaintenanceSchedule.Api", "src\MotorcycleMaintenanceSchedule.Api\MotorcycleMaintenanceSchedule.Api.csproj", "{181D539D-E5FA-4F73-A9DE-F0CDEE828DEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorcycleMaintenanceSchedule.Application", "src\MotorcycleMaintenanceSchedule.Application\MotorcycleMaintenanceSchedule.Application.csproj", "{CB124D66-5D7B-49D1-817C-4A4402547374}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotorcycleMaintenanceSchedule.Application", "src\MotorcycleMaintenanceSchedule.Application\MotorcycleMaintenanceSchedule.Application.csproj", "{CB124D66-5D7B-49D1-817C-4A4402547374}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorcycleMaintenanceSchedule.Infrastructure", "src\MotorcycleMaintenanceSchedule.Infrastructure\MotorcycleMaintenanceSchedule.Infrastructure.csproj", "{4EBE842E-DAA0-402B-934E-9FD634B1AC2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotorcycleMaintenanceSchedule.Infrastructure", "src\MotorcycleMaintenanceSchedule.Infrastructure\MotorcycleMaintenanceSchedule.Infrastructure.csproj", "{4EBE842E-DAA0-402B-934E-9FD634B1AC2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorcycleMaintenanceSchedule.Domain", "src\MotorcycleMaintenanceSchedule.Domain\MotorcycleMaintenanceSchedule.Domain.csproj", "{05564D9B-1DFE-4B69-A827-14F4F2FB7BAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotorcycleMaintenanceSchedule.Domain", "src\MotorcycleMaintenanceSchedule.Domain\MotorcycleMaintenanceSchedule.Domain.csproj", "{05564D9B-1DFE-4B69-A827-14F4F2FB7BAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20E90B11-5EE3-4F17-A3FA-55CD1E3FCCB1}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,7 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ACEA2F35-E1FD-4F2B-98D7-62A62BBA3CCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorcycleMaintenanceSchedule.DomainTests", "tests\MotorcycleMaintenanceSchedule.DomainTests\MotorcycleMaintenanceSchedule.DomainTests.csproj", "{F3AD509B-215C-406C-B9C5-6EFAAD453A1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotorcycleMaintenanceSchedule.DomainTests", "tests\MotorcycleMaintenanceSchedule.DomainTests\MotorcycleMaintenanceSchedule.DomainTests.csproj", "{F3AD509B-215C-406C-B9C5-6EFAAD453A1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorcycleMaintenanceSchedule.ApplicationTests", "tests\MotorcycleMaintenanceSchedule.ApplicationTests\MotorcycleMaintenanceSchedule.ApplicationTests.csproj", "{BE2B44F7-2670-4DC4-9155-B5C79C637002}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,11 +48,19 @@ Global
 		{F3AD509B-215C-406C-B9C5-6EFAAD453A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3AD509B-215C-406C-B9C5-6EFAAD453A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3AD509B-215C-406C-B9C5-6EFAAD453A1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE2B44F7-2670-4DC4-9155-B5C79C637002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE2B44F7-2670-4DC4-9155-B5C79C637002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE2B44F7-2670-4DC4-9155-B5C79C637002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE2B44F7-2670-4DC4-9155-B5C79C637002}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F3AD509B-215C-406C-B9C5-6EFAAD453A1F} = {ACEA2F35-E1FD-4F2B-98D7-62A62BBA3CCC}
+		{BE2B44F7-2670-4DC4-9155-B5C79C637002} = {ACEA2F35-E1FD-4F2B-98D7-62A62BBA3CCC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CE5220E-F38C-42B5-9FA2-7CFF421B88EA}
 	EndGlobalSection
 EndGlobal
