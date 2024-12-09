@@ -1,5 +1,4 @@
-﻿
-namespace MotorcycleMaintenanceSchedule.Api.Controllers.BaseController;
+﻿namespace MotorcycleMaintenanceSchedule.Domain.Exceptions;
 
 [Serializable]
 public sealed class BussinessExceptionExtension : Exception

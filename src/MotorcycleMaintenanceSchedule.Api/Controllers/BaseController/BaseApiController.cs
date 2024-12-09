@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MotorcycleMaintenanceSchedule.Application.Exceptions;
+using MotorcycleMaintenanceSchedule.Domain.Exceptions;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 using System.Net;
 using System.Runtime.Serialization;

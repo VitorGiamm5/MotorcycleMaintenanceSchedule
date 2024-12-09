@@ -7,12 +7,12 @@ namespace MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 public class ScheduleEntity : BaseHoursInformation
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    public required string Id { get; set; } = "";
+    public string Id { get; set; } = "";
     public required string Name { get; set; } = "";
-    public required string Email { get; set; } = "";
-    public required int Phone { get; set; } = 0;
-    public required int PhoneDDD { get; set; } = 0;
-    public required string Observation { get; set; } = "";
+    public string? Email { get; set; } = "";
+    public int? Phone { get; set; } = 0;
+    public int? PhoneDDD { get; set; } = 0;
+    public string? Observation { get; set; } = "";
     public ScheduleStatusEnum Status { get; set; }
-    public required string MotorcycleId { get; set; } = "";
+    public string? MotorcycleId { get; set; } = "";
 }
