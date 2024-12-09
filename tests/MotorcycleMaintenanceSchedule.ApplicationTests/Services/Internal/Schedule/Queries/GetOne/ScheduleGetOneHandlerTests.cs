@@ -6,7 +6,7 @@ using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
 using NUnit.Framework;
 
-namespace MotorcycleMaintenanceSchedule.ApplicationTests.Services.Internal.Schedule.Queries;
+namespace MotorcycleMaintenanceSchedule.ApplicationTests.Services.Internal.Schedule.Queries.GetOne;
 
 public class ScheduleGetOneHandlerTests
 {
