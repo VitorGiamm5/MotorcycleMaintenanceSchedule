@@ -34,7 +34,9 @@ public class ScheduleCreateHandler : IRequestHandler<ScheduleCreateCommand, Acti
         await _scheduleRepository.Create(schedule);
 
         var result = new ActionResult();
+
         result.SetData(schedule);
+
         return result;
     }
 }

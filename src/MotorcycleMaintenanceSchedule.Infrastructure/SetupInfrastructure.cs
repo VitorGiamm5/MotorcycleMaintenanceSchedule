@@ -8,7 +8,6 @@ using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule.BaseRepositories;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
 using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule;
-using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule.BaseRepositories;
 using Polly;
 using Polly.Retry;
 

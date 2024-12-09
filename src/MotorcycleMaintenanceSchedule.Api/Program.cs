@@ -30,7 +30,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = $"Core Motorcycle, Rental, Deliverier - {builder.Environment.EnvironmentName}",
+        Title = $"Maintence schedule motorcycle - {builder.Environment.EnvironmentName}",
         Version = "v1"
     });
     c.CustomSchemaIds(type => type.ToString());

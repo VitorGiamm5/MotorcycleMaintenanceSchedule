@@ -2,7 +2,7 @@
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule.BaseRepositories;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
 
-namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule.BaseRepositories;
+namespace MotorcycleMaintenanceSchedule.Infrastructure.Repositories.BaseRepositories;
 
 public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 {

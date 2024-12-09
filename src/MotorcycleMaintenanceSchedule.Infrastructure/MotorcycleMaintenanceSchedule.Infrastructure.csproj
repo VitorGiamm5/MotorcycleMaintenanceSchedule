@@ -11,8 +11,8 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11" />
-		<PackageReference Include="Polly" Version="8.4.3" />
-	</ItemGroup>
+		<PackageReference Include="Polly" Version="8.5.0" />
+  </ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\MotorcycleMaintenanceSchedule.Domain\MotorcycleMaintenanceSchedule.Domain.csproj" />

@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
+﻿namespace MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 
 public sealed class ActionResult
 {
@@ -31,7 +29,7 @@ public sealed class ActionResult
         Data = null;
         Error = new ErrorDetails
         {
-            Message = message is StringBuilder sb ? sb.ToString() : message?.ToString(),
+            Message = message?.ToString(),
             Details = details
         };
     }

@@ -4,8 +4,9 @@ using MotorcycleMaintenanceSchedule.Api.Controllers.BaseController;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Commands.Create;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Commands.Delete;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Commands.Update;
+using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.GetOne;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.List;
-using MotorcycleMaintenanceSchedule.Domain.Schedule;
+using MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
 
 namespace MotorcycleMaintenanceSchedule.Api.Controllers;
 
@@ -14,19 +15,32 @@ namespace MotorcycleMaintenanceSchedule.Api.Controllers;
 public class ScheduleController(IMediator _mediator) : BaseApiController
 {
     [HttpGet]
-    public async Task<IActionResult> List([FromQuery] ScheduleListParams request)
+    public async Task<IActionResult> List([FromQuery] ScheduleListParams command)
     {
         try
         {
-            request.OrderBy ??= ScheduleOrderByEnum.DateCreated;
-
-            var result = await _mediator.Send(new ScheduleListParamsQuery(request));
+            var result = await _mediator.Send(new ScheduleListParamsQuery(command));
 
             return Response(result);
         }
         catch (Exception ex)
         {
-            return ResponseError(ex);
+            return ResponseException(ex);
+        }
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetOne(string id)
+    {
+        try
+        {
+            var result = await _mediator.Send(new ScheduleGetOneQuery { Id = id });
+
+            return Response(result);
+        }
+        catch (Exception ex)
+        {
+            return ResponseException(ex);
         }
     }
 
@@ -36,26 +50,28 @@ public class ScheduleController(IMediator _mediator) : BaseApiController
         try
         {
             var result = await _mediator.Send(command);
+
             return Response(result);
         }
         catch (Exception ex)
         {
-            return ResponseError(ex);
+            return ResponseException(ex);
         }
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string? id, [FromBody] ScheduleUpdateCommand command)
+    public async Task<IActionResult> Update(string id, [FromBody] ScheduleUpdateCommand command)
     {
         try
         {
             command.Id = id;
             var result = await _mediator.Send(command);
+
             return Response(result);
         }
         catch (Exception ex)
         {
-            return ResponseError(ex);
+            return ResponseException(ex);
         }
     }
 
@@ -65,11 +81,12 @@ public class ScheduleController(IMediator _mediator) : BaseApiController
         try
         {
             var result = await _mediator.Send(new ScheduleDeleteCommand { Id = id });
+
             return Response(result);
         }
         catch (Exception ex)
         {
-            return ResponseError(ex);
+            return ResponseException(ex);
         }
     }
 }
