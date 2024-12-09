@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MotorcycleMaintenanceSchedule.Domain.Exceptions;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 
@@ -16,22 +17,17 @@ public class ScheduleGetOneHandler : IRequestHandler<ScheduleGetOneQuery, Action
     public async Task<ActionResult> Handle(ScheduleGetOneQuery request, CancellationToken cancellationToken)
     {
         var result = new ActionResult();
-        try
+
+        var schedule = await _scheduleRepository.GetById(request.Id);
+
+        if (schedule?.Id == null)
         {
-            var schedule = await _scheduleRepository.GetById(request.Id);
-            if (schedule == null)
-            {
-                result.SetError("Schedule not found");
-            }
-            else
-            {
-                result.SetData(schedule);
-            }
+            result.SetError("Schedule", FaultMessagesConst.MESSAGE_ERROR_NOT_FOUND);
+
+            return result;
         }
-        catch (Exception ex)
-        {
-            result.SetError("schedule", ex);
-        }
+
+        result.SetData(schedule);
 
         return result;
     }

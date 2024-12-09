@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "5f258d5a-9277-4a82-af39-2504cca09f96",
+		"name": "Schedule Maintence",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40309676"
+	},
+	"item": [
+		{
+			"name": "List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9103/api/schedule",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedule"
+					],
+					"query": [
+						{
+							"key": "OrderBy",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "Status",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "SearchField",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "SearchValue",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "ScheduleDateStart",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "ScheduleDateEnd",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "PageNumber",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "PageSize",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "Ascending",
+							"value": "false",
+							"disabled": true
+						},
+						{
+							"key": "CreationDateStart",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "CreationDateEnd",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOne",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9103/api/schedule/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedule",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "9c45cc0a-8157-411b-b20d-c5bb51d3b87f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9103/api/schedule/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedule",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "9c45cc0a-8157-411b-b20d-c5bb51d3b87f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dateCreated\": \"2024-12-09T17:04:35.865Z\",\r\n  \"dateLastUpdate\": \"2024-12-09T17:04:35.865Z\",\r\n  \"startBusinessHour\": \"2024-12-09T17:04:35.865Z\",\r\n  \"endBusinessHour\": \"2024-12-09T17:04:35.865Z\",\r\n  \"scheduleDate\": \"2024-12-09T17:04:35.865Z\",\r\n  \"name\": \"string\",\r\n  \"email\": \"string\",\r\n  \"phone\": 0,\r\n  \"phoneDDD\": 0,\r\n  \"observation\": \"string\",\r\n  \"status\": \"AwaitingForSchedule\",\r\n  \"motorcycleId\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9103/api/schedule/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedule",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "9c45cc0a-8157-411b-b20d-c5bb51d3b87f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dateCreated\": \"2024-12-09T21:17:09.181Z\",\r\n  \"createdBy\": \"string\",\r\n  \"dateLastUpdate\": \"2024-12-09T21:17:09.181Z\",\r\n  \"startBusinessHour\": \"2024-12-09T21:17:09.181Z\",\r\n  \"endBusinessHour\": \"2024-12-09T21:17:09.181Z\",\r\n  \"scheduleDate\": \"2024-12-09T21:17:09.181Z\",\r\n  \"id\": \"string\",\r\n  \"name\": \"string\",\r\n  \"email\": \"string\",\r\n  \"phone\": 0,\r\n  \"phoneDDD\": 0,\r\n  \"observation\": \"string\",\r\n  \"status\": \"AwaitingForSchedule\",\r\n  \"motorcycleId\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9103/api/schedule/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedule",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

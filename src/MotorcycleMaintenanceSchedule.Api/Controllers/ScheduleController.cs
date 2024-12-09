@@ -17,76 +17,41 @@ public class ScheduleController(IMediator _mediator) : BaseApiController
     [HttpGet]
     public async Task<IActionResult> List([FromQuery] ScheduleListParams command)
     {
-        try
-        {
-            var result = await _mediator.Send(new ScheduleListParamsQuery(command));
+        var result = await _mediator.Send(new ScheduleListParamsQuery(command));
 
-            return Response(result);
-        }
-        catch (Exception ex)
-        {
-            return ResponseException(ex);
-        }
+        return Response(result);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOne(string id)
     {
-        try
-        {
-            var result = await _mediator.Send(new ScheduleGetOneQuery { Id = id });
+        var result = await _mediator.Send(new ScheduleGetOneQuery { Id = id });
 
-            return Response(result);
-        }
-        catch (Exception ex)
-        {
-            return ResponseException(ex);
-        }
+        return Response(result);
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] ScheduleCreateCommand command)
     {
-        try
-        {
-            var result = await _mediator.Send(command);
+        var result = await _mediator.Send(command);
 
-            return Response(result);
-        }
-        catch (Exception ex)
-        {
-            return ResponseException(ex);
-        }
+        return Response(result);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(string id, [FromBody] ScheduleUpdateCommand command)
     {
-        try
-        {
-            command.Id = id;
-            var result = await _mediator.Send(command);
+        command.Id = id;
+        var result = await _mediator.Send(command);
 
-            return Response(result);
-        }
-        catch (Exception ex)
-        {
-            return ResponseException(ex);
-        }
+        return Response(result);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id)
     {
-        try
-        {
-            var result = await _mediator.Send(new ScheduleDeleteCommand { Id = id });
+        var result = await _mediator.Send(new ScheduleDeleteCommand { Id = id });
 
-            return Response(result);
-        }
-        catch (Exception ex)
-        {
-            return ResponseException(ex);
-        }
+        return Response(result);
     }
 }

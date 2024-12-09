@@ -28,7 +28,9 @@ public class ScheduleCreateHandler : IRequestHandler<ScheduleCreateCommand, Acti
             MotorcycleId = request.MotorcycleId,
             StartBusinessHour = request.StartBusinessHour,
             EndBusinessHour = request.EndBusinessHour,
-            ScheduleDate = request.ScheduleDate
+            ScheduleDate = request.ScheduleDate,
+            CreatedBy = "admin",
+            DateCreated = DateTime.UtcNow
         };
 
         await _scheduleRepository.Create(schedule);

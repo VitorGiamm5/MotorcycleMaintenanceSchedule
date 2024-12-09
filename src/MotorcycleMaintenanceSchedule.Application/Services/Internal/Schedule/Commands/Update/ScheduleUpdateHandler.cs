@@ -21,23 +21,23 @@ public class ScheduleUpdateHandler : IRequestHandler<ScheduleUpdateCommand, Acti
         try
         {
             var schedule = await _scheduleRepository.GetById(request.Id);
+
             if (schedule == null)
             {
-                result.SetError("Schedule not found");
+                result.SetError("Schedule", FaultMessagesConst.MESSAGE_ERROR_NOT_FOUND);
 
-                throw new BussinessExceptionExtension("schedule".);
+                return result;
             }
 
-            schedule.Id = schedule.Id;
-            schedule.Name = schedule.Name;
-            schedule.Email = schedule.Email;
-            schedule.Phone = schedule.Phone;
-            schedule.PhoneDDD = schedule.PhoneDDD;
-            schedule.Observation = schedule.Observation;
-            schedule.Status = schedule.Status;
-            schedule.MotorcycleId = schedule.MotorcycleId;
+            schedule.Name = request.Name;
+            schedule.Email = request.Email;
+            schedule.Phone = request.Phone;
+            schedule.PhoneDDD = request.PhoneDDD;
+            schedule.Observation = request.Observation;
+            schedule.Status = request.Status;
+            schedule.MotorcycleId = request.MotorcycleId;
             schedule.StartBusinessHour = schedule.StartBusinessHour;
-            schedule.EndBusinessHour = schedule.EndBusinessHour;
+            schedule.EndBusinessHour = request.EndBusinessHour;
             schedule.DateLastUpdate = DateTime.UtcNow;
 
             await _scheduleRepository.Update(schedule);
