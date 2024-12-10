@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: randandan
       POSTGRES_PASSWORD: randandan_XLR
-      POSTGRES_DB: dbmaintenanceschedule
+      POSTGRES_DB: dbgodelivery
     ports:
       - "9000:5432" # Mapeando porta padrão do PostgreSQL
     volumes:
@@ -48,8 +48,8 @@ services:
       - RabbitMQ__Username=guest
       - RabbitMQ__Password=guest
       - RabbitMQ__Port=5672
-      - RabbitMQ__QueuesName__MaintenanceSchedulPublishQueue=maintenance-schedule-notification-queue
-      - RabbitMQ__QueuesName__MaintenanceSchedulConsumerQueue=maintenance-schedule-notification-queue
+      - RabbitMQ__QueuesName__MaintenanceSchedulePublishQueue=maintenance-schedule-notification-queue
+      - RabbitMQ__QueuesName__MaintenanceScheduleConsumerQueue=maintenance-schedule-notification-queue
       - ConnectionStrings__Postgres=Server=91612379773_postgres; Port=5432; Database=dbgodelivery; User ID=randandan; Password=randandan_XLR;
     depends_on:
       - 91612379773_postgres

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MotorcycleMaintenanceSchedule.Application.Services.Internal.NotificationSchedule;
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
@@ -8,17 +9,21 @@ namespace MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.C
 public class ScheduleCreateHandler : IRequestHandler<ScheduleCreateCommand, ActionResult>
 {
     private readonly IScheduleRepository _scheduleRepository;
+    private readonly NotificationSchedulePublisher _notification;
 
-    public ScheduleCreateHandler(IScheduleRepository scheduleRepository)
+    public ScheduleCreateHandler(
+        IScheduleRepository scheduleRepository,
+        NotificationSchedulePublisher notification)
     {
         _scheduleRepository = scheduleRepository;
+        _notification = notification;
     }
 
     public async Task<ActionResult> Handle(ScheduleCreateCommand request, CancellationToken cancellationToken)
     {
         var schedule = new ScheduleEntity
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = Ulid.NewUlid().ToString(),
             Name = request.Name,
             Email = request.Email,
             Phone = request.Phone,
@@ -38,6 +43,10 @@ public class ScheduleCreateHandler : IRequestHandler<ScheduleCreateCommand, Acti
         var result = new ActionResult();
 
         result.SetData(schedule);
+
+        var notification = ScheduleToNotificationMappers.Map(schedule);
+
+        _notification.PublishMotorcycle(notification);
 
         return result;
     }
