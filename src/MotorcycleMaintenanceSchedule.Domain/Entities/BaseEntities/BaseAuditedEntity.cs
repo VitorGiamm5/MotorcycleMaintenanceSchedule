@@ -8,7 +8,7 @@ public class BaseAuditedEntity
     public DateTime DateCreated { get; set; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    public string CreatedBy { get; set; }
+    public string? CreatedBy { get; set; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public DateTime? DateLastUpdate { get; set; }

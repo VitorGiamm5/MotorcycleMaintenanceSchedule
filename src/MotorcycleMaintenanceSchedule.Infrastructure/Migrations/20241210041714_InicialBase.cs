@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace MotorcycleMaintenanceSchedule.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InicialBaseA : Migration
+    public partial class InicialBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,6 +38,24 @@ namespace MotorcycleMaintenanceSchedule.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_tb_schedule", x => x.ID_SCHEDULE);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "tb_schedule_notification",
+                schema: "dbmaintenanceschedule",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "text", nullable: false),
+                    ID_SCHEDULE = table.Column<string>(type: "text", nullable: false),
+                    ID_MOTORCYCLE = table.Column<string>(type: "text", nullable: true),
+                    NAME = table.Column<string>(type: "text", nullable: false),
+                    SCHEDULE_DATE = table.Column<string>(type: "text", nullable: true),
+                    STATUS = table.Column<int>(type: "integer", nullable: false),
+                    NOTIFICATION_DATE = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tb_schedule_notification", x => x.ID);
+                });
         }
 
         /// <inheritdoc />
@@ -44,6 +63,10 @@ namespace MotorcycleMaintenanceSchedule.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "tb_schedule",
+                schema: "dbmaintenanceschedule");
+
+            migrationBuilder.DropTable(
+                name: "tb_schedule_notification",
                 schema: "dbmaintenanceschedule");
         }
     }

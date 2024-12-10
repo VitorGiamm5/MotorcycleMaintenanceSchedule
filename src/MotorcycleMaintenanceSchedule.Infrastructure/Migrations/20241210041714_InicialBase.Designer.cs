@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MotorcycleMaintenanceSchedule.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241209170119_InicialBase")]
+    [Migration("20241210041714_InicialBase")]
     partial class InicialBase
     {
         /// <inheritdoc />
@@ -25,6 +25,43 @@ namespace MotorcycleMaintenanceSchedule.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("MotorcycleMaintenanceSchedule.Domain.Entities.Schedule.NotificationScheduleEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
+                        .HasColumnName("ID");
+
+                    b.Property<string>("MotorcyleId")
+                        .HasColumnType("text")
+                        .HasColumnName("ID_MOTORCYCLE");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("NAME");
+
+                    b.Property<DateTime>("NotificationDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("NOTIFICATION_DATE");
+
+                    b.Property<string>("ScheduleDate")
+                        .HasColumnType("text")
+                        .HasColumnName("SCHEDULE_DATE");
+
+                    b.Property<string>("ScheduleId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ID_SCHEDULE");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("STATUS");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tb_schedule_notification", "dbmaintenanceschedule");
+                });
 
             modelBuilder.Entity("MotorcycleMaintenanceSchedule.Domain.Entities.Schedule.ScheduleEntity", b =>
                 {

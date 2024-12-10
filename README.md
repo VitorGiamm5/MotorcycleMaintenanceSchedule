@@ -34,7 +34,7 @@ $ docker ps -a
 7. Executar as migrations (esteja com seu terminal na raíz do projeto "c:/Projetos/CoreGoDelivery")
 $ dotnet ef database update -s src\MotorcycleMaintenanceSchedule.Api -p src\MotorcycleMaintenanceSchedule.Infrastructure
 
-8. Para conectar o Banco recomenda-se usar o DBeaver, para facilitar a importação de dados que serão necessários!
+8. Para conectar o Postgres recomenda-se usar o DBeaver, para facilitar a importação de dados que serão necessários!
 
 Host: localhost
 Port: 9000

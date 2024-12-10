@@ -47,6 +47,8 @@ public static class SetupInfrastructure
     {
         services.TryAddScoped<IScheduleListRepository, ScheduleListRepository>();
         services.TryAddScoped<IScheduleRepository, ScheduleRepository>();
+        services.TryAddScoped<INotificationScheduleRepository, NotificationScheduleRepository>();
+
 
         services.TryAddScoped<IBaseRepository<ScheduleEntity>, ScheduleListRepository>();
     }
