@@ -51,8 +51,8 @@ public static class SetupApplication
                         $"Port: '{configuration["RabbitMQ:Port"]}'");
 
                     Console.WriteLine(
-                        $"Publish: '{configuration["RabbitMQ:QueuesName:MotorcycleNotificationPublishQueue"]}'," +
-                        $"Consumer: '{configuration["RabbitMQ:QueuesName:MotorcycleNotificationConsumerQueue"]}'");
+                        $"Publish: '{configuration["RabbitMQ:QueuesName:MaintenanceSchedulePublishQueue"]}'," +
+                        $"Consumer: '{configuration["RabbitMQ:QueuesName:MaintenanceScheduleConsumerQueue"]}'");
 
                 });
             return policy.Execute(() => factory.CreateConnection());
