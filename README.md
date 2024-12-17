@@ -1,4 +1,4 @@
-Go Core Delivery
+Motorcycle Maintence Schedule CRUD
 
 Especificações:
 - Dotnet Core 8.0
@@ -8,7 +8,9 @@ Especificações:
 - Docker
 - Docker compose
 - Polly
-- xUnit
+- NUnit
+- Moq
+- Fluent Assertion
 
 #How to run
 1. Abra o terminal, preferencialmente na raiz C:/ (opcional)
@@ -53,15 +55,24 @@ $ dotnet ef database update -s src\MotorcycleMaintenanceSchedule.Api -p src\Moto
 
 Referências:
 
-- Página administrativa do RabbitMQ
+- Página admin do RabbitMQ
 http://localhost:9002/#/
 
-Serviço							Porta Interna	Porta Externa	Observação
-PostgreSQL						5432	        9000	        Porta padrão do PostgreSQL
-RabbitMQ (AMQP)					5672	        9001	        Porta para o protocolo AMQP
-RabbitMQ (UI)					15672	        9002	        Porta para a interface de UI
-MinIO (API)						9000	        9003	        Porta da API do MinIO
-MinIO (Console)					9001	        9004	        Porta do console do MinIO
-CoreGoDelivery					9005            9005	        Porta da aplicação
-MotorcycleMaintenanceSchedule	9103            9103	        Porta da aplicação principal
+Serviço					      Porta Interna	Porta Externa	Observação
+PostgreSQL						5432	          9000	          Porta padrão do PostgreSQL
+RabbitMQ (AMQP)					5672	          9001	          Porta para o protocolo AMQP
+RabbitMQ (UI)					15672	          9002	          Porta para a interface de UI
+CoreGoDelivery					9005           9005	          Porta da aplicação
+MotorcycleMaintenanceSchedule         9103           9103	          Porta da aplicação principal
+
+
+Estrutura
+[tests]
+- Domain
+- Application
+[src]
+- Api
+- Application
+- Domain
+- Infrastructure
 

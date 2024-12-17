@@ -9,11 +9,11 @@ namespace MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.C
 public class ScheduleCreateHandler : IRequestHandler<ScheduleCreateCommand, ActionResult>
 {
     private readonly IScheduleRepository _scheduleRepository;
-    private readonly NotificationSchedulePublisher _notification;
+    private readonly INotificationSchedulePublisher _notification;
 
     public ScheduleCreateHandler(
         IScheduleRepository scheduleRepository,
-        NotificationSchedulePublisher notification)
+        INotificationSchedulePublisher notification)
     {
         _scheduleRepository = scheduleRepository;
         _notification = notification;

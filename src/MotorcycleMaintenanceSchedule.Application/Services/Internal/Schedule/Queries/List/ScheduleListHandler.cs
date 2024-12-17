@@ -30,15 +30,6 @@ public class ScheduleListHandler : IRequestHandler<ScheduleListParamsQuery, Acti
 
         var result = await _scheduleListRepository.List(queryParams);
 
-        var apiReponse = new ActionResult();
-
-        apiReponse.SetData(result.Items);
-
-        apiReponse.SetPaginationMetadata(
-            currentPage: result.Pagination!.CurrentPage,
-            pageSize: result.Pagination.PageSize,
-            totalRecords: result.Pagination.TotalRecords);
-
-        return apiReponse;
+        return result;
     }
 }

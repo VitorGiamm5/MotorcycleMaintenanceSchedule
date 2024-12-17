@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
@@ -7,7 +6,6 @@ using Newtonsoft.Json;
 using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using RabbitMQ.Client.Exceptions;
 using System.Text;
 
 namespace MotorcycleMaintenanceSchedule.Application.Services.External.NotificationSchedule;
@@ -22,12 +20,11 @@ public class NotificationScheduleConsumer : BackgroundService
     public NotificationScheduleConsumer(
         IConnection connection,
         IServiceScopeFactory serviceScopeFactory,
-        IConfiguration configuration)
+        string consumerQueueName)
     {
-        _connection = connection;
-        _serviceScopeFactory = serviceScopeFactory;
-        _consumerQueueName = configuration["RabbitMQ:QueuesName:MaintenanceScheduleConsumerQueue"]
-            ?? throw new BrokerUnreachableException(new Exception("RabbitMQ queue name is not configured."));
+        _connection = connection ?? throw new ArgumentNullException(nameof(connection));
+        _serviceScopeFactory = serviceScopeFactory ?? throw new ArgumentNullException(nameof(serviceScopeFactory));
+        _consumerQueueName = consumerQueueName ?? throw new ArgumentNullException(nameof(consumerQueueName));
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)

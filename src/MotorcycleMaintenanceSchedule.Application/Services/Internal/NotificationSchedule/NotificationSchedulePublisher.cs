@@ -1,22 +1,19 @@
-﻿using Microsoft.Extensions.Configuration;
-using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
+﻿using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Exceptions;
 using System.Text;
 using System.Text.Json;
 
 namespace MotorcycleMaintenanceSchedule.Application.Services.Internal.NotificationSchedule;
 
-public class NotificationSchedulePublisher
+public class NotificationSchedulePublisher : INotificationSchedulePublisher
 {
     private readonly IConnection _connection;
     private readonly string _publisherQueueName;
 
-    public NotificationSchedulePublisher(IConnection connection, IConfiguration configuration)
+    public NotificationSchedulePublisher(IConnection? connection, string? publisherQueueName)
     {
-        _connection = connection;
-        _publisherQueueName = configuration["RabbitMQ:QueuesName:MaintenanceSchedulePublishQueue"]
-                              ?? throw new BrokerUnreachableException(new Exception("RabbitMQ queue name for publisher is not configured."));
+        _connection = connection ?? throw new ArgumentNullException(nameof(connection));
+        _publisherQueueName = publisherQueueName ?? throw new ArgumentNullException(nameof(publisherQueueName));
     }
 
     public void PublishMotorcycle(NotificationScheduleEntity motorcycle)

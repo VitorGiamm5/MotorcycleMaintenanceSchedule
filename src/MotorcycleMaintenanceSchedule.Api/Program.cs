@@ -37,6 +37,11 @@ builder.Services.AddSwaggerGen(c =>
     c.OperationFilter<DefaultValuesOperation>();
 });
 
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+});
+
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile(path: "appsettings.json", optional: false, reloadOnChange: true)
@@ -71,6 +76,8 @@ if (app.Environment.IsDevelopment())
 
     ExecutePendingMigration.Execute(builder.Services);
 }
+
+app.UseResponseCompression();
 
 app.UseHttpsRedirection();
 

@@ -10,7 +10,7 @@ using MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.Lis
 
 namespace MotorcycleMaintenanceSchedule.Api.Controllers;
 
-[Route("api/schedule")]
+[Route("api/schedules")]
 [ApiController]
 public class ScheduleController(IMediator _mediator) : BaseApiController
 {

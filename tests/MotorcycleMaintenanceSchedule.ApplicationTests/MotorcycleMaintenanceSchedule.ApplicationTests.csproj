@@ -27,15 +27,8 @@
     <ProjectReference Include="..\..\src\MotorcycleMaintenanceSchedule.Infrastructure\MotorcycleMaintenanceSchedule.Infrastructure.csproj" />
   </ItemGroup>
   
-  <!--<ItemGroup>
-    <Using Include="NUnit.Framework" />
-  </ItemGroup>-->
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Internal\Schedule\Commands\Create\" />
   </ItemGroup>
 
 </Project>

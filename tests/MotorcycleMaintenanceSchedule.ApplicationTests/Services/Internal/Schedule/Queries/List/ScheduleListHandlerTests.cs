@@ -40,12 +40,9 @@ public class ScheduleGetOneHandlerTests
                 MotorcycleId = $"MotorcycleId{i}"
             });
         }
-
-        var paginatedResult = new PaginatedResult<ScheduleEntity>
-        {
-            Items = scheduleEntities.Skip(5).Take(5).ToList(),
-            Pagination = new PaginationMetadata(2, 5, 10)
-        };
+        var paginatedResult = new ActionResult();
+        paginatedResult.SetData(scheduleEntities.Skip(5).Take(5).ToList());
+        paginatedResult.SetPaginationMetadata(new PaginationMetadata(2, 5, 10));
 
         _scheduleRepositoryMock.Setup(repo => repo.List(It.IsAny<ScheduleListParams>()))
             .ReturnsAsync(paginatedResult);

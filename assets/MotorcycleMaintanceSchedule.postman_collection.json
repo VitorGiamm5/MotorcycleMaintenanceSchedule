@@ -1,0 +1,704 @@
+{
+	"info": {
+		"_postman_id": "fb64a125-7267-4694-960d-9b519487bfff",
+		"name": "MotorcycleMaintanceSchedule",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39035584"
+	},
+	"item": [
+		{
+			"name": "Swagger",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9103/swagger/index.html",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"swagger",
+						"index.html"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Get List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9103/api/schedules?PageSize=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedules"
+					],
+					"query": [
+						{
+							"key": "PageSize",
+							"value": "10"
+						},
+						{
+							"key": "Ascending",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "PageNumber",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "OrderBy",
+							"value": "phone",
+							"disabled": true
+						},
+						{
+							"key": "Status",
+							"value": "Scheduled",
+							"disabled": true
+						},
+						{
+							"key": "SearchField",
+							"value": "Name",
+							"disabled": true
+						},
+						{
+							"key": "SearchValue",
+							"value": "aa",
+							"disabled": true
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": [
+				{
+					"name": "Get List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9103/api/schedule?PageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9103",
+							"path": [
+								"api",
+								"schedule"
+							],
+							"query": [
+								{
+									"key": "PageSize",
+									"value": "10"
+								},
+								{
+									"key": "Ascending",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "PageNumber",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "OrderBy",
+									"value": "phone",
+									"disabled": true
+								},
+								{
+									"key": "Status",
+									"value": "Scheduled",
+									"disabled": true
+								},
+								{
+									"key": "SearchField",
+									"value": "Name",
+									"disabled": true
+								},
+								{
+									"key": "SearchValue",
+									"value": "aa",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 04:12:22 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": \"01JEXQVA3TS08K521DV0WFQ0V0\",\n            \"name\": \"string\",\n            \"email\": \"string\",\n            \"phone\": 0,\n            \"phoneDDD\": 0,\n            \"observation\": \"string\",\n            \"status\": \"AwaitingForSchedule\",\n            \"motorcycleId\": \"string\",\n            \"dateCreated\": \"2024-12-12T15:29:54.810857Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF8ZQQD5N2A4GXSTBPC702BQ\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T00:19:24.710888Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF92RKH84CQZSA4BZ2099PMA\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T01:12:19.242411Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF92XGWHGJTVZYHFWXMDYCCT\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T01:15:00.371327Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF935T90X55KCV0MDZCSWZQ6\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T01:19:32.13013Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF93EMW36APEHTCRHWTT3DMQ\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T01:24:21.508801Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF9CDY52GAZFVY170NG4S6KQ\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T04:01:15.427321Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF9CMA6XXJAXVN9ASRC5FCY8\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T04:04:44.382597Z\",\n            \"createdBy\": \"admin\"\n        }\n    ],\n    \"pagination\": {\n        \"currentPage\": 1,\n        \"pageSize\": 10,\n        \"totalRecords\": 8,\n        \"totalPages\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get One",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9103/api/schedules/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedules",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": [
+				{
+					"name": "Get List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9103/api/schedule?PageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9103",
+							"path": [
+								"api",
+								"schedule"
+							],
+							"query": [
+								{
+									"key": "PageSize",
+									"value": "10"
+								},
+								{
+									"key": "Ascending",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "PageNumber",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "OrderBy",
+									"value": "phone",
+									"disabled": true
+								},
+								{
+									"key": "Status",
+									"value": "Scheduled",
+									"disabled": true
+								},
+								{
+									"key": "SearchField",
+									"value": "Name",
+									"disabled": true
+								},
+								{
+									"key": "SearchValue",
+									"value": "aa",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 04:12:22 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": \"01JEXQVA3TS08K521DV0WFQ0V0\",\n            \"name\": \"string\",\n            \"email\": \"string\",\n            \"phone\": 0,\n            \"phoneDDD\": 0,\n            \"observation\": \"string\",\n            \"status\": \"AwaitingForSchedule\",\n            \"motorcycleId\": \"string\",\n            \"dateCreated\": \"2024-12-12T15:29:54.810857Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF8ZQQD5N2A4GXSTBPC702BQ\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T00:19:24.710888Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF92RKH84CQZSA4BZ2099PMA\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T01:12:19.242411Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF92XGWHGJTVZYHFWXMDYCCT\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T01:15:00.371327Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF935T90X55KCV0MDZCSWZQ6\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T01:19:32.13013Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF93EMW36APEHTCRHWTT3DMQ\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T01:24:21.508801Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF9CDY52GAZFVY170NG4S6KQ\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T04:01:15.427321Z\",\n            \"createdBy\": \"admin\"\n        },\n        {\n            \"id\": \"01JF9CMA6XXJAXVN9ASRC5FCY8\",\n            \"name\": \"bbb\",\n            \"email\": \"b@b.com\",\n            \"phone\": 22222222,\n            \"phoneDDD\": 51,\n            \"observation\": \"tesste\",\n            \"status\": \"Scheduled\",\n            \"motorcycleId\": \"2\",\n            \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n            \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n            \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n            \"dateCreated\": \"2024-12-17T04:04:44.382597Z\",\n            \"createdBy\": \"admin\"\n        }\n    ],\n    \"pagination\": {\n        \"currentPage\": 1,\n        \"pageSize\": 10,\n        \"totalRecords\": 8,\n        \"totalPages\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Post data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"bbb\",\n    \"email\": \"b@b.com\",\n    \"phone\": 22222222,\n    \"phoneDDD\": 51,\n    \"observation\": \"tesste\",\n    \"status\": \"Scheduled\",\n    \"motorcycleId\": \"2\",\n    \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n    \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n    \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n    \"dateCreated\": \"2024-11-08T15:43:00.954Z\",\n    \"createdBy\": \"admin\",\n    \"dateLastUpdate\": \"2000-11-09T01:43:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9103/api/schedules",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedules"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": [
+				{
+					"name": "Post data",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bbb\",\n    \"email\": \"b@b.com\",\n    \"phone\": 22222222,\n    \"phoneDDD\": 51,\n    \"observation\": \"tesste\",\n    \"status\": \"Scheduled\",\n    \"motorcycleId\": \"2\",\n    \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n    \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n    \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n    \"dateCreated\": \"2024-11-08T15:43:00.954Z\",\n    \"createdBy\": \"admin\",\n    \"dateLastUpdate\": \"2000-11-09T01:43:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9103/api/schedule",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9103",
+							"path": [
+								"api",
+								"schedule"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 04:04:44 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"01JF9CMA6XXJAXVN9ASRC5FCY8\",\n        \"name\": \"bbb\",\n        \"email\": \"b@b.com\",\n        \"phone\": 22222222,\n        \"phoneDDD\": 51,\n        \"observation\": \"tesste\",\n        \"status\": \"Scheduled\",\n        \"motorcycleId\": \"2\",\n        \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n        \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n        \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n        \"dateCreated\": \"2024-12-17T04:04:44.3825978Z\",\n        \"createdBy\": \"admin\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "id",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"edited\",\n    \"email\": \"b@b.com\",\n    \"phone\": 22222222,\n    \"phoneDDD\": 51,\n    \"observation\": \"tesste\",\n    \"status\": \"Scheduled\",\n    \"motorcycleId\": \"2\",\n    \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n    \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n    \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n    \"dateCreated\": \"2024-11-08T15:43:00.954Z\",\n    \"createdBy\": \"admin\",\n    \"dateLastUpdate\": \"2000-11-09T01:43:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9103/api/schedules/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedules",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "01JF9CMA6XXJAXVN9ASRC5FCY8"
+						}
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": [
+				{
+					"name": "Update data",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"edited\",\n    \"email\": \"b@b.com\",\n    \"phone\": 22222222,\n    \"phoneDDD\": 51,\n    \"observation\": \"tesste\",\n    \"status\": \"Scheduled\",\n    \"motorcycleId\": \"2\",\n    \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n    \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n    \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n    \"dateCreated\": \"2024-11-08T15:43:00.954Z\",\n    \"createdBy\": \"admin\",\n    \"dateLastUpdate\": \"2000-11-09T01:43:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9103/api/schedule/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9103",
+							"path": [
+								"api",
+								"schedule",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "01JF9CMA6XXJAXVN9ASRC5FCY8"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 04:13:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"01JF9CMA6XXJAXVN9ASRC5FCY8\",\n        \"name\": \"edited\",\n        \"email\": \"b@b.com\",\n        \"phone\": 22222222,\n        \"phoneDDD\": 51,\n        \"observation\": \"tesste\",\n        \"status\": \"Scheduled\",\n        \"motorcycleId\": \"2\",\n        \"startBusinessHour\": \"2050-11-08T11:00:00+00:00\",\n        \"endBusinessHour\": \"2024-11-08T21:00:00+00:00\",\n        \"scheduleDate\": \"2024-11-08T20:00:00+00:00\",\n        \"dateCreated\": \"2024-12-17T04:04:44.382597Z\",\n        \"createdBy\": \"admin\",\n        \"dateLastUpdate\": \"2024-12-17T04:13:09\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9103/api/schedules/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9103",
+					"path": [
+						"api",
+						"schedules",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "01JF9CDY52GAZFVY170NG4S6KQ"
+						}
+					]
+				},
+				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+			},
+			"response": [
+				{
+					"name": "Delete data",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9103/api/schedule/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9103",
+							"path": [
+								"api",
+								"schedule",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "01JF9CDY52GAZFVY170NG4S6KQ"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 04:13:28 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
