@@ -10,7 +10,7 @@ using System.Text;
 
 namespace MotorcycleMaintenanceSchedule.Application.Services.External.NotificationSchedule;
 
-public class NotificationScheduleConsumer : BackgroundService, INotificationScheduleConsumer
+public class NotificationScheduleConsumer : BackgroundService
 {
     private readonly IConnection _connection;
     private readonly IServiceScopeFactory _serviceScopeFactory;
@@ -18,9 +18,9 @@ public class NotificationScheduleConsumer : BackgroundService, INotificationSche
     private IModel? _channel;
 
     public NotificationScheduleConsumer(
-        IConnection? connection,
-        IServiceScopeFactory? serviceScopeFactory,
-        string? consumerQueueName)
+        IConnection connection,
+        IServiceScopeFactory serviceScopeFactory,
+        string consumerQueueName)
     {
         _connection = connection ?? throw new ArgumentNullException(nameof(connection));
         _serviceScopeFactory = serviceScopeFactory ?? throw new ArgumentNullException(nameof(serviceScopeFactory));
