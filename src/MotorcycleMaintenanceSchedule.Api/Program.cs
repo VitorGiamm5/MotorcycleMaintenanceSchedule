@@ -1,15 +1,17 @@
-using Microsoft.AspNetCore.Components;
 using Microsoft.OpenApi.Models;
 using MotorcycleMaintenanceSchedule.Api.Converters;
 using MotorcycleMaintenanceSchedule.Api.Swagger;
 using MotorcycleMaintenanceSchedule.Application;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database.Services;
 using System.Text.Json.Serialization;
+using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+LogManager.Setup().LoadConfigurationFromFile("nlog.config");
+
 builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -30,11 +32,27 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = $"Maintence schedule motorcycle - {builder.Environment.EnvironmentName}",
-        Version = "v1"
+        Title = $"Maintence schedule motorcycle API - {builder.Environment.EnvironmentName}",
+        Version = "v1",
+        Contact = new OpenApiContact() { Name = ": Send Email", Email = "vitorgiammella@gmail.com" },
+        Description = $"<b>ENVIRONMENT:<b/> {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}"
     });
     c.CustomSchemaIds(type => type.ToString());
     c.OperationFilter<DefaultValuesOperation>();
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 
 builder.Services.AddResponseCompression(options =>
@@ -62,12 +80,14 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll", builder =>
     {
         builder.AllowAnyOrigin()
-               .AllowAnyMethod()
+               .WithMethods("GET", "POST", "PUT", "DELETE")
                .AllowAnyHeader();
     });
 });
 
 var app = builder.Build();
+
+app.UseAuthorization();
 
 if (app.Environment.IsDevelopment())
 {
@@ -85,6 +105,6 @@ app.UseAuthorization();
 
 app.UseCors("AllowAll");
 
-app.MapControllers().WithMetadata(new RouteAttribute("api/[controller]"));
+app.MapControllers();
 
-app.Run();
+await app.RunAsync();

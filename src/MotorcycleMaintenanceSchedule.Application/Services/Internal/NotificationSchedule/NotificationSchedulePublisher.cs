@@ -1,4 +1,5 @@
 ﻿using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
+using NLog;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
@@ -9,6 +10,7 @@ public class NotificationSchedulePublisher : INotificationSchedulePublisher
 {
     private readonly IConnection _connection;
     private readonly string _publisherQueueName;
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
     public NotificationSchedulePublisher(IConnection? connection, string? publisherQueueName)
     {
@@ -38,11 +40,12 @@ public class NotificationSchedulePublisher : INotificationSchedulePublisher
                                  basicProperties: null,
                                  body: body);
 
-            Console.WriteLine($"[x] Published message to {_publisherQueueName}: {message}");
+            Logger.Debug($"[x] Published message to {_publisherQueueName}");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error publishing message to {_publisherQueueName}: {ex.Message}");
+            Logger.Error(ex, $"Error publishing message to {_publisherQueueName}");
+
             throw;
         }
     }

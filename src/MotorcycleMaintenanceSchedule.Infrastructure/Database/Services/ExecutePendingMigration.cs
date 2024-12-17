@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NLog;
 
 namespace MotorcycleMaintenanceSchedule.Infrastructure.Database.Services;
 
 public static class ExecutePendingMigration
 {
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
     public static void Execute(IServiceCollection services)
     {
         var serviceProvider = services.BuildServiceProvider();
@@ -19,14 +22,14 @@ public static class ExecutePendingMigration
 
             if (migrations.Any())
             {
-                Console.WriteLine($"Apply migrations success");
+                Logger.Debug($"Apply migrations success");
 
                 dbContext.Database.MigrateAsync().Wait();
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error to apply migrations: {ex.Message}");
+            Logger.Error(ex, $"Error to apply migrations: {ex.Message}");
 
             throw;
         }
