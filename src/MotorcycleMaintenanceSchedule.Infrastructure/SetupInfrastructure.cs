@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 using MotorcycleMaintenanceSchedule.Domain;
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;

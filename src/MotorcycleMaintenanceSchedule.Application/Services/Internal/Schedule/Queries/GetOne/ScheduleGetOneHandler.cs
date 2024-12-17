@@ -21,7 +21,7 @@ public class ScheduleGetOneHandler : IRequestHandler<ScheduleGetOneQuery, Action
 
         if (schedule?.Id == null)
         {
-            result.SetError("Schedule", FaultMessageEnum.NotFound);
+            result.SetError("Schedule", FaultMessagesConst.MESSAGE_ERROR_NOT_FOUND);
 
             return result;
         }

@@ -3,15 +3,12 @@ using MotorcycleMaintenanceSchedule.Api.Converters;
 using MotorcycleMaintenanceSchedule.Api.Swagger;
 using MotorcycleMaintenanceSchedule.Application;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database.Services;
-using System.Text.Json.Serialization;
 using NLog;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 LogManager.Setup().LoadConfigurationFromFile("nlog.config");
-
-builder.Logging.ClearProviders();
-builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
