@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using MotorcycleMaintenanceSchedule.Domain.Exceptions;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 
@@ -22,7 +21,7 @@ public class ScheduleGetOneHandler : IRequestHandler<ScheduleGetOneQuery, Action
 
         if (schedule?.Id == null)
         {
-            result.SetError("Schedule", FaultMessagesConst.MESSAGE_ERROR_NOT_FOUND);
+            result.SetError("Schedule", FaultMessageEnum.NotFound);
 
             return result;
         }

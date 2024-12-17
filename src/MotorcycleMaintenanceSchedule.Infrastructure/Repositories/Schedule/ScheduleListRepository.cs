@@ -14,25 +14,7 @@ public class ScheduleListRepository : BaseRepository<ScheduleEntity>, IScheduleL
     {
     }
 
-    public async Task<PaginatedResult<ScheduleEntity>> ListAll()
-    {
-        var query = _context.Set<ScheduleEntity>().AsQueryable();
-
-        var items = await query.ToListAsync() ?? [];
-
-        var result = new PaginatedResult<ScheduleEntity>()
-        {
-            Items = items,
-            Pagination = new PaginationMetadata(
-                currentPage: 1,
-                pageSize: 100000,
-                totalRecords: items.Count)
-        };
-
-        return result;
-    }
-
-    public async Task<PaginatedResult<ScheduleEntity>> List(ScheduleListParams queryParams)
+    public async Task<ActionResult> List(ScheduleListParams queryParams)
     {
         var query = _context.Set<ScheduleEntity>().AsQueryable();
 
@@ -47,12 +29,12 @@ public class ScheduleListRepository : BaseRepository<ScheduleEntity>, IScheduleL
         {
             query = queryParams.SearchField switch
             {
-                ScheduleSearchFieldEnum.Id => query.Where(s => s.Id.Contains(queryParams.SearchValue)),
+                ScheduleSearchFieldEnum.Id => query.Where(s => s.Id == queryParams.SearchValue),
                 ScheduleSearchFieldEnum.Name => query.Where(s => s.Name.Contains(queryParams.SearchValue)),
-                ScheduleSearchFieldEnum.Email => query.Where(s => s.Email.Contains(queryParams.SearchValue)),
-                ScheduleSearchFieldEnum.Phone => query.Where(s => s.Phone.ToString().Contains(queryParams.SearchValue)),
-                ScheduleSearchFieldEnum.PhoneDDD => query.Where(s => s.PhoneDDD.ToString().Contains(queryParams.SearchValue)),
-                ScheduleSearchFieldEnum.MotorcycleId => query.Where(s => s.MotorcycleId.Contains(queryParams.SearchValue)),
+                ScheduleSearchFieldEnum.Email => query.Where(s => s.Email == queryParams.SearchValue),
+                ScheduleSearchFieldEnum.Phone => query.Where(s => s.Phone.ToString() == queryParams.SearchValue),
+                ScheduleSearchFieldEnum.PhoneDDD => query.Where(s => s.PhoneDDD.ToString() == queryParams.SearchValue),
+                ScheduleSearchFieldEnum.MotorcycleId => query.Where(s => s.MotorcycleId == queryParams.SearchValue),
                 _ => query.Where(s => s.Name.Contains(queryParams.SearchValue)),
             };
         }
@@ -88,14 +70,15 @@ public class ScheduleListRepository : BaseRepository<ScheduleEntity>, IScheduleL
 
         var items = await query.ToListAsync() ?? [];
 
-        var result = new PaginatedResult<ScheduleEntity>()
-        {
-            Items = items,
-            Pagination = new PaginationMetadata(
+        var result = new ActionResult();
+
+        result.SetData(items);
+        result.SetPaginationMetadata(
+            new PaginationMetadata(
                 currentPage: queryParams.PageNumber!.Value,
                 pageSize: queryParams.PageSize!.Value,
                 totalRecords: totalRecords)
-        };
+            );
 
         return result;
     }

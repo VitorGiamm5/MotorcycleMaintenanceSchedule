@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MotorcycleMaintenanceSchedule.Domain.Exceptions;
-using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
-using System.Net;
-using System.Runtime.Serialization;
 using ActionResult = MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse.ActionResult;
 
 namespace MotorcycleMaintenanceSchedule.Api.Controllers.BaseController;

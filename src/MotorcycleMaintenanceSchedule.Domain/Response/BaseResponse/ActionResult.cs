@@ -39,6 +39,11 @@ public sealed class ActionResult
         Data = data;
     }
 
+    public void SetPaginationMetadata(PaginationMetadata pagination)
+    {
+        Pagination = pagination;
+    }
+
     public void SetPaginationMetadata(int currentPage, int pageSize, int totalRecords)
     {
         Pagination = new PaginationMetadata(currentPage, pageSize, totalRecords);

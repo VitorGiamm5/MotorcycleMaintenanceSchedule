@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Moq;
+using MotorcycleMaintenanceSchedule.Application.Services.Internal.NotificationSchedule;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Commands.Create;
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
@@ -11,13 +12,15 @@ namespace MotorcycleMaintenanceSchedule.ApplicationTests.Services.Internal.Sched
 public class ScheduleCreateHandlerTests
 {
     private Mock<IScheduleRepository> _scheduleRepositoryMock;
+    private Mock<INotificationSchedulePublisher> _notificationMock;
     private ScheduleCreateHandler _handler;
 
     [SetUp]
     public void Setup()
     {
         _scheduleRepositoryMock = new Mock<IScheduleRepository>();
-        _handler = new ScheduleCreateHandler(_scheduleRepositoryMock.Object);
+        _notificationMock = new Mock<INotificationSchedulePublisher>();
+        _handler = new ScheduleCreateHandler(_scheduleRepositoryMock.Object, _notificationMock.Object);
     }
 
     [Test]
@@ -62,6 +65,8 @@ public class ScheduleCreateHandlerTests
         _scheduleRepositoryMock.Setup(repo => repo.Create(It.IsAny<ScheduleEntity>()))
                 .ReturnsAsync((ScheduleEntity schedule) => schedule);
 
+        _notificationMock.Setup(n => n.PublishMotorcycle(It.IsAny<NotificationScheduleEntity>()));
+
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
 
@@ -70,5 +75,6 @@ public class ScheduleCreateHandlerTests
         result.HasData().Should().BeTrue();
 
         expectedSchedule.Should().BeEquivalentTo(expectedSchedule);
+        _notificationMock.Verify(n => n.PublishMotorcycle(It.IsAny<NotificationScheduleEntity>()), Times.Once);
     }
 }

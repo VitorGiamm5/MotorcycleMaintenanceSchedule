@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Commands.Delete;
-using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.GetOne;
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using NUnit.Framework;
@@ -26,8 +25,8 @@ public class ScheduleDeleteHandlerTests
     {
         // Arrange
         var scheduleId = "existing-id";
-        var scheduleEntity = new ScheduleEntity 
-        { 
+        var scheduleEntity = new ScheduleEntity
+        {
             Id = scheduleId,
             Name = "oi"
         };

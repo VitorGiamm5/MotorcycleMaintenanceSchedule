@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MotorcycleMaintenanceSchedule.Application.Services.External.NotificationSchedule;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.NotificationSchedule;
 using MotorcycleMaintenanceSchedule.Domain.Settings.RabbitMQ;
 using MotorcycleMaintenanceSchedule.Infrastructure;
-
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Polly;
 using RabbitMQ.Client;
 using System.Reflection;
@@ -58,8 +57,20 @@ public static class SetupApplication
             return policy.Execute(() => factory.CreateConnection());
         });
 
-        services.TryAddTransient<NotificationSchedulePublisher>();
-        services.AddHostedService<NotificationScheduleConsumer>();
+        services.AddTransient<INotificationSchedulePublisher, NotificationSchedulePublisher>(sp =>
+            new NotificationSchedulePublisher(
+                sp.GetRequiredService<IConnection>(),
+                publisherQueueName: configuration["RabbitMQ:QueuesName:MaintenanceSchedulePublishQueue"]!
+            )
+        );
+
+        services.AddHostedService<NotificationScheduleConsumer>(sp =>
+            new NotificationScheduleConsumer(
+                sp.GetRequiredService<IConnection>(),
+                sp.GetRequiredService<IServiceScopeFactory>(),
+                consumerQueueName: configuration["RabbitMQ:QueuesName:MaintenanceScheduleConsumerQueue"]!
+            )
+        );
 
         return services;
     }
