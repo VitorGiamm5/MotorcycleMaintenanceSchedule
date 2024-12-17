@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MotorcycleMaintenanceSchedule.Application.Services.External.NotificationSchedule;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.NotificationSchedule;
@@ -30,6 +32,10 @@ public static class SetupApplication
                 consumerQueueName: configuration["RabbitMQ:QueuesName:MaintenanceScheduleConsumerQueue"]!
             )
         );
+
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+        services.AddFluentValidationAutoValidation();
 
         return services;
     }

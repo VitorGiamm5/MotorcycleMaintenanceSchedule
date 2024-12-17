@@ -9,6 +9,7 @@ using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule.BaseRepositorie
 using MotorcycleMaintenanceSchedule.Domain.Settings.RabbitMQ;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
 using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule;
+using NLog;
 using Polly;
 using Polly.Retry;
 using RabbitMQ.Client;
@@ -17,6 +18,8 @@ namespace MotorcycleMaintenanceSchedule.Infrastructure;
 
 public static class SetupInfrastructure
 {
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDomain(configuration);
@@ -30,7 +33,7 @@ public static class SetupInfrastructure
                 sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
                 onRetry: (exception, timespan, attempt, context) =>
                 {
-                    Console.WriteLine($"Retry {attempt} fail with error: {exception.Message}. Lets try again {timespan}.");
+                    Logger.Error(exception, $"Retry {attempt} fail with error. Lets try again in {timespan}.");
                 }
             );
 
@@ -65,15 +68,15 @@ public static class SetupInfrastructure
                 .Handle<Exception>()
                 .WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (exception, timeSpan, retryCount, context) =>
                 {
-                    Console.WriteLine($"Retry {retryCount} for RabbitMQ connection: {exception.Message}");
+                    Logger.Error(exception, $"Retry {retryCount} for RabbitMQ connection.");
 
-                    Console.WriteLine(
+                    Logger.Info(
                         $"HostName: '{configuration["RabbitMQ:Host"]}'," +
                         $"UserName: '{configuration["RabbitMQ:Username"]}'," +
                         $"Password: '{configuration["RabbitMQ:Password"]}'," +
                         $"Port: '{configuration["RabbitMQ:Port"]}'");
 
-                    Console.WriteLine(
+                    Logger.Info(
                         $"Publish: '{configuration["RabbitMQ:QueuesName:MaintenanceSchedulePublishQueue"]}'," +
                         $"Consumer: '{configuration["RabbitMQ:QueuesName:MaintenanceScheduleConsumerQueue"]}'");
 

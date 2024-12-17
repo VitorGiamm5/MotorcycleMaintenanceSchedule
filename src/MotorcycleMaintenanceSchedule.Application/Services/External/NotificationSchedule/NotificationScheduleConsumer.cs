@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using Newtonsoft.Json;
+using NLog;
 using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -12,6 +13,7 @@ namespace MotorcycleMaintenanceSchedule.Application.Services.External.Notificati
 
 public class NotificationScheduleConsumer : BackgroundService
 {
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     private readonly IConnection _connection;
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly string _consumerQueueName;
@@ -36,8 +38,8 @@ public class NotificationScheduleConsumer : BackgroundService
                 sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
                 onRetry: (exception, timespan, attempt, context) =>
                 {
-                    Console.WriteLine($"{_connection.Endpoint}");
-                    Console.WriteLine($"Retry {attempt}: Connection to RabbitMQ failed. Exception: {exception.Message}. Next attempt in {timespan}.");
+                    Logger.Error("RabbitMQ", $"{_connection.Endpoint}");
+                    Logger.Error("RabbitMQ", $"Retry {attempt}: Connection to RabbitMQ failed. Exception: {exception.Message}. Next attempt in {timespan}.");
                 });
 
         retryPolicy.Execute(() =>
@@ -49,7 +51,7 @@ public class NotificationScheduleConsumer : BackgroundService
                                   autoDelete: false,
                                   arguments: null);
 
-            Console.WriteLine($"Queue {_consumerQueueName} declared successfully.");
+            Logger.Debug(_consumerQueueName, $"Queue {_consumerQueueName} declared successfully.");
         });
 
         StartConsumer(stoppingToken);
@@ -70,10 +72,9 @@ public class NotificationScheduleConsumer : BackgroundService
         {
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
-
-            Console.WriteLine($"Message received from queue {_consumerQueueName}: {message}");
-
             var notification = JsonConvert.DeserializeObject<NotificationScheduleEntity>(message)!;
+
+            Logger.Debug($"Message received from queue {_consumerQueueName}: {notification.Id}");
 
             using var scope = _serviceScopeFactory.CreateScope();
 
@@ -81,11 +82,12 @@ public class NotificationScheduleConsumer : BackgroundService
             try
             {
                 await notificationRepository.Create(notification);
-                Console.WriteLine("Message processed and saved to database successfully.");
+
+                Logger.Debug("Message processed and saved to database successfully.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving message to database: {ex.Message}");
+                Logger.Error(ex, $"Error saving message to database: {ex.Message}");
             }
         };
 
@@ -93,7 +95,7 @@ public class NotificationScheduleConsumer : BackgroundService
                               autoAck: true,
                               consumer: consumer);
 
-        Console.WriteLine($"Consumer started on queue {_consumerQueueName}.");
+        Logger.Debug($"Consumer started on queue {_consumerQueueName}.");
     }
 
     public override void Dispose()
