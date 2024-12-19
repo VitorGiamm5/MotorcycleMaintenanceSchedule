@@ -11,6 +11,7 @@ Especificações:
 - NUnit
 - Moq
 - Fluent Assertion
+- NLog
 
 #How to run
 1. Abra o terminal, preferencialmente na raiz C:/ (opcional)
