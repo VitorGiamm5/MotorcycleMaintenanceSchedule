@@ -78,7 +78,8 @@ builder.Services.AddCors(options =>
     {
         builder.AllowAnyOrigin()
                .WithMethods("GET", "POST", "PUT", "DELETE")
-               .AllowAnyHeader();
+               .AllowAnyHeader()
+               .SetPreflightMaxAge(TimeSpan.FromMinutes(10));
     });
 });
 
