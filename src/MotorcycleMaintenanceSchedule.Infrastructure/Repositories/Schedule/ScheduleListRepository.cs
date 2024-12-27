@@ -64,8 +64,11 @@ public class ScheduleListRepository : BaseRepository<ScheduleEntity>, IScheduleL
 
         if (queryParams.PageNumber.HasValue && queryParams.PageSize.HasValue)
         {
-            query = query.Skip((queryParams.PageNumber.Value - 1) * queryParams.PageSize.Value)
-                         .Take(queryParams.PageSize.Value);
+            int skip = (queryParams.PageNumber.Value - 1) * queryParams.PageSize.Value;
+            int take = queryParams.PageSize.Value;
+
+            query = query.Skip(skip)
+                         .Take(take);
         }
 
         var items = await query.ToListAsync() ?? [];
