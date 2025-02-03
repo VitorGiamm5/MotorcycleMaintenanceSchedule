@@ -22,6 +22,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotorcycleMaintenanceSchedu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorcycleMaintenanceSchedule.ApplicationTests", "tests\MotorcycleMaintenanceSchedule.ApplicationTests\MotorcycleMaintenanceSchedule.ApplicationTests.csproj", "{BE2B44F7-2670-4DC4-9155-B5C79C637002}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy-schedule", "deploy-schedule", "{275E051A-6AE0-4CB8-9789-127968D3314F}"
+	ProjectSection(SolutionItems) = preProject
+		DeploySchedule\.dockerignore = DeploySchedule\.dockerignore
+		DeploySchedule\docker-compose.yml = DeploySchedule\docker-compose.yml
+		DeploySchedule\Dockerfile = DeploySchedule\Dockerfile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
