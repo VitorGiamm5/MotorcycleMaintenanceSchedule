@@ -34,7 +34,7 @@ Observação:
 5. Verificar se os serviços estão online (91612379773_postgre, 91612379773_rabbitmq e 41864645926_api_maintenanceschedule)
 $ docker ps -a
 
-7. Executar as migrations (esteja com seu terminal na raíz do projeto "c:/Projetos/CoreGoDelivery")
+7. Executar as migrations (esteja com seu terminal na raíz do projeto "c:/Projetos/MotorcycleMaintenanceSchedule")
 $ dotnet ef database update -s src\MotorcycleMaintenanceSchedule.Api -p src\MotorcycleMaintenanceSchedule.Infrastructure
 
 8. Para conectar o Postgres recomenda-se usar o DBeaver, para facilitar a importação de dados que serão necessários!
@@ -49,6 +49,8 @@ Certifique-se de possuir o EF instalado localmente
 $ dotnet tool install --global dotnet-ef
 
 Gerar migration, considere abrir o Powershell na pasta raiz do projeto: 
+exemplo: C:\Projetos\MotorcycleMaintenanceSchedule
+Obs.: Necessário que o terminal reconheça os comandos 'dotnet'
 $ dotnet ef migrations add InicialBase -s src\MotorcycleMaintenanceSchedule.Api -p src\MotorcycleMaintenanceSchedule.Infrastructure
 
 Atualizar o banco:

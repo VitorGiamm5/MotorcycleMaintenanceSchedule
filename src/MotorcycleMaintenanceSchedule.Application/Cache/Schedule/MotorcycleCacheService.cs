@@ -22,7 +22,7 @@ public class MotorcycleCacheService : IMotorcycleCacheService
     {
         var db = _redis.GetDatabase();
 
-        var motorcycleKey = $"{_prefix}-{schedule.MotorcycleId}-{schedule.Date}";
+        var motorcycleKey = $"{_prefix}-{schedule.ScheduleId}-{schedule.Date}";
 
         var jsonData = JsonSerializer.Serialize(schedule);
 

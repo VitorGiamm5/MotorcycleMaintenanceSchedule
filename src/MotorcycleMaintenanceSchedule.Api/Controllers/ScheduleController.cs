@@ -16,21 +16,21 @@ namespace MotorcycleMaintenanceSchedule.Api.Controllers;
 [ApiController]
 public class ScheduleController(IMediator _mediator) : BaseApiController
 {
-    [HttpGet]
-    public async Task<IActionResult> List([FromQuery] ScheduleListParams command)
-    {
-        var result = await _mediator.Send(new ScheduleListParamsQuery(command));
+    //[HttpGet]
+    //public async Task<IActionResult> List([FromQuery] ScheduleListParams command)
+    //{
+    //    var result = await _mediator.Send(new ScheduleListParamsQuery(command));
 
-        return Response(result);
-    }
+    //    return Response(result);
+    //}
 
-    [HttpGet]
-    public async Task<IActionResult> Summary([FromQuery] ScheduleSummaryParams command)
-    {
-        var result = await _mediator.Send(new ScheduleSummaryParamsQuery(command));
+    //[HttpGet]
+    //public async Task<IActionResult> Summary([FromQuery] ScheduleSummaryParams command)
+    //{
+    //    var result = await _mediator.Send(new ScheduleSummaryParamsQuery(command));
 
-        return Response(result);
-    }
+    //    return Response(result);
+    //}
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOne(string id)

@@ -48,7 +48,8 @@ public static class ScheduleCreateMappers
     {
         var result = new ScheduleSummaryDto()
         {
-            MotorcycleId = data.MotorcycleId!,
+            ScheduleId = data.Id!,
+            Status = data.Status,
             Price = data.Price ?? 0,
             Date = DateTime.UtcNow.ToString("yyyy-MM-dd")
         };
