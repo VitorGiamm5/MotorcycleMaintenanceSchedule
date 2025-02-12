@@ -1,8 +1,8 @@
 ﻿using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 
-namespace MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Commands.Create;
+namespace MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.Summary;
 
-public static class ScheduleToNotificationMappers
+public static class ScheduleSummaryMappers
 {
     public static NotificationScheduleEntity Map(ScheduleEntity data)
     {
@@ -14,7 +14,7 @@ public static class ScheduleToNotificationMappers
             MotorcyleId = data.MotorcycleId,
             ScheduleDate = data.ScheduleDate.ToString(),
             Status = data.Status,
-            NotificationDate = DateTime.UtcNow
+            DateCreated = DateTime.UtcNow
         };
 
         return result;

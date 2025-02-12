@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using MotorcycleMaintenanceSchedule.Application.Services.Internal.NotificationSchedule;
-using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
+using MotorcycleMaintenanceSchedule.Application.Cache.Interfaces;
+using MotorcycleMaintenanceSchedule.Application.Notifications.Interfaces.Schedule.Publisher;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
 
@@ -10,33 +10,22 @@ public class ScheduleCreateHandler : IRequestHandler<ScheduleCreateCommand, Acti
 {
     private readonly IScheduleRepository _scheduleRepository;
     private readonly INotificationSchedulePublisher _notification;
+    private readonly IMotorcycleCacheService _cache;
 
     public ScheduleCreateHandler(
         IScheduleRepository scheduleRepository,
-        INotificationSchedulePublisher notification)
+        INotificationSchedulePublisher notification,
+        IMotorcycleCacheService motorcycleCacheService
+        )
     {
         _scheduleRepository = scheduleRepository;
         _notification = notification;
+        _cache = motorcycleCacheService;
     }
 
-    public async Task<ActionResult> Handle(ScheduleCreateCommand request, CancellationToken cancellationToken)
+    public async Task<ActionResult> Handle(ScheduleCreateCommand command, CancellationToken cancellationToken)
     {
-        var schedule = new ScheduleEntity
-        {
-            Id = Ulid.NewUlid().ToString(),
-            Name = request.Name,
-            Email = request.Email,
-            Phone = request.Phone,
-            PhoneDDD = request.PhoneDDD,
-            Observation = request.Observation,
-            Status = request.Status,
-            MotorcycleId = request.MotorcycleId,
-            StartBusinessHour = request.StartBusinessHour,
-            EndBusinessHour = request.EndBusinessHour,
-            ScheduleDate = request.ScheduleDate,
-            CreatedBy = "admin",
-            DateCreated = DateTime.UtcNow
-        };
+        var schedule = ScheduleCreateMappers.ToEntity(command);
 
         await _scheduleRepository.Create(schedule);
 
@@ -44,9 +33,13 @@ public class ScheduleCreateHandler : IRequestHandler<ScheduleCreateCommand, Acti
 
         result.SetData(schedule);
 
-        var notification = ScheduleToNotificationMappers.Map(schedule);
+        var notification = ScheduleCreateMappers.ToNotification(schedule);
 
         _notification.PublishMotorcycle(notification);
+
+        var scheduleSummary = ScheduleCreateMappers.ToSummary(schedule);
+
+        await _cache.AddScheduleAsync(scheduleSummary, true);
 
         return result;
     }

@@ -9,7 +9,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 
-namespace MotorcycleMaintenanceSchedule.Application.Services.External.NotificationSchedule;
+namespace MotorcycleMaintenanceSchedule.Application.Notifications.Services.Schedule.RabitMQ.Consumer;
 
 public class NotificationScheduleConsumer : BackgroundService
 {
@@ -54,12 +54,12 @@ public class NotificationScheduleConsumer : BackgroundService
             Logger.Debug(_consumerQueueName, $"Queue {_consumerQueueName} declared successfully.");
         });
 
-        StartConsumer(stoppingToken);
+        StartConsumer();
 
         return Task.CompletedTask;
     }
 
-    private void StartConsumer(CancellationToken stoppingToken)
+    private void StartConsumer()
     {
         if (_channel == null)
         {
@@ -74,7 +74,7 @@ public class NotificationScheduleConsumer : BackgroundService
             var message = Encoding.UTF8.GetString(body);
             var notification = JsonConvert.DeserializeObject<NotificationScheduleEntity>(message)!;
 
-            Logger.Debug($"Message received from queue {_consumerQueueName}: {notification.Id}");
+            Logger.Debug(_consumerQueueName, $"Message received from queue {_consumerQueueName}: {notification.Id}");
 
             using var scope = _serviceScopeFactory.CreateScope();
 
@@ -95,7 +95,7 @@ public class NotificationScheduleConsumer : BackgroundService
                               autoAck: true,
                               consumer: consumer);
 
-        Logger.Debug($"Consumer started on queue {_consumerQueueName}.");
+        Logger.Debug(_consumerQueueName, $"Consumer started on queue {_consumerQueueName}.");
     }
 
     public override void Dispose()

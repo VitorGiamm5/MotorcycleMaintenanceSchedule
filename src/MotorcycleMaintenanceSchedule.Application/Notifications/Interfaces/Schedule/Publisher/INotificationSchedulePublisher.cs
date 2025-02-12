@@ -1,6 +1,6 @@
 ﻿using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 
-namespace MotorcycleMaintenanceSchedule.Application.Services.Internal.NotificationSchedule;
+namespace MotorcycleMaintenanceSchedule.Application.Notifications.Interfaces.Schedule.Publisher;
 
 public interface INotificationSchedulePublisher
 {

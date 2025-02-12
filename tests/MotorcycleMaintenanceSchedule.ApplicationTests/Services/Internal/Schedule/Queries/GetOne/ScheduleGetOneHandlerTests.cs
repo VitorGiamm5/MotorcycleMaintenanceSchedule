@@ -3,7 +3,7 @@ using Moq;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.GetOne;
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
-using MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
+using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.List;
 using NUnit.Framework;
 
 namespace MotorcycleMaintenanceSchedule.ApplicationTests.Services.Internal.Schedule.Queries.GetOne;

@@ -1,5 +1,5 @@
 ﻿using MotorcycleMaintenanceSchedule.Domain.Entities.BaseEntities;
-using MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
+using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.List;
 using System.Text.Json.Serialization;
 
 namespace MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
@@ -15,4 +15,5 @@ public class ScheduleEntity : BaseHoursInformation
     public string? Observation { get; set; }
     public ScheduleStatusEnum Status { get; set; }
     public string? MotorcycleId { get; set; }
+    public decimal? Price { get; set; }
 }

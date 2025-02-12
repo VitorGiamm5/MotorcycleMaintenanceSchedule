@@ -1,4 +1,4 @@
-﻿namespace MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
+﻿namespace MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.List;
 
 public enum ScheduleSearchFieldEnum
 {

@@ -12,12 +12,13 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<ScheduleEntity>
 
         builder.HasKey(t => t.Id);
 
-        builder.Property(t => t.Id).HasColumnName("ID_SCHEDULE");
+        builder.Property(t => t.Id).HasColumnName("ID_SCHEDULE").IsRequired();
         builder.Property(t => t.Name).HasColumnName("NAME").IsRequired();
         builder.Property(t => t.Email).HasColumnName("EMAIL").IsRequired(false);
         builder.Property(t => t.Phone).HasColumnName("PHONE").IsRequired(false);
         builder.Property(t => t.PhoneDDD).HasColumnName("PHONE_DDD").IsRequired(false);
         builder.Property(t => t.Status).HasColumnName("STATUS").IsRequired();
+        builder.Property(t => t.Price).HasColumnName("PRICE").IsRequired(false);
 
         builder.Property(t => t.MotorcycleId).HasColumnName("ID_FK_MOTORCYCLE").IsRequired(false);
 

@@ -6,7 +6,9 @@ using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Comma
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Commands.Update;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.GetOne;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.List;
-using MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
+using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.Summary;
+using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.List;
+using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.Summary;
 
 namespace MotorcycleMaintenanceSchedule.Api.Controllers;
 
@@ -18,6 +20,14 @@ public class ScheduleController(IMediator _mediator) : BaseApiController
     public async Task<IActionResult> List([FromQuery] ScheduleListParams command)
     {
         var result = await _mediator.Send(new ScheduleListParamsQuery(command));
+
+        return Response(result);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Summary([FromQuery] ScheduleSummaryParams command)
+    {
+        var result = await _mediator.Send(new ScheduleSummaryParamsQuery(command));
 
         return Response(result);
     }

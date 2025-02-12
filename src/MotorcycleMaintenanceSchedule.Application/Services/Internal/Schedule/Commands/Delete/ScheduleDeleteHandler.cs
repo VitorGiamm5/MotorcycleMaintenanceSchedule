@@ -13,20 +13,22 @@ public class ScheduleDeleteHandler : IRequestHandler<ScheduleDeleteCommand, Acti
         _scheduleRepository = scheduleRepository;
     }
 
-    public async Task<ActionResult> Handle(ScheduleDeleteCommand request, CancellationToken cancellationToken)
+    public async Task<ActionResult> Handle(ScheduleDeleteCommand command, CancellationToken cancellationToken)
     {
         var result = new ActionResult();
 
         try
         {
-            var schedule = await _scheduleRepository.GetById(request.Id);
+            var schedule = await _scheduleRepository.GetById(command.Id);
+
             if (schedule == null)
             {
                 result.SetError("Schedule", FaultMessagesConst.MESSAGE_ERROR_NOT_FOUND);
+
                 return result;
             }
 
-            await _scheduleRepository.Delete(request.Id);
+            await _scheduleRepository.Delete(command.Id);
         }
         catch (Exception ex)
         {

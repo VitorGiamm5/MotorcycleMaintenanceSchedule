@@ -25,5 +25,10 @@
     <ProjectReference Include="..\MotorcycleMaintenanceSchedule.Domain\MotorcycleMaintenanceSchedule.Domain.csproj" />
     <ProjectReference Include="..\MotorcycleMaintenanceSchedule.Infrastructure\MotorcycleMaintenanceSchedule.Infrastructure.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Notifications\Services\Schedule\ZeroMQ\Consumer\" />
+    <Folder Include="Notifications\Services\Schedule\ZeroMQ\Publisher\" />
+  </ItemGroup>
 
 </Project>

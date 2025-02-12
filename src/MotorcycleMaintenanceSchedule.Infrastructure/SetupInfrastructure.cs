@@ -7,12 +7,14 @@ using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule.BaseRepositories;
 using MotorcycleMaintenanceSchedule.Domain.Settings.RabbitMQ;
+using MotorcycleMaintenanceSchedule.Domain.Settings.Redis;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
 using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.Schedule;
 using NLog;
 using Polly;
 using Polly.Retry;
 using RabbitMQ.Client;
+using StackExchange.Redis;
 
 namespace MotorcycleMaintenanceSchedule.Infrastructure;
 
@@ -58,6 +60,15 @@ public static class SetupInfrastructure
             };
 
             return factory;
+        });
+
+        var redisSettings = configuration.GetSection("Redis").Get<RedisSettings>();
+
+        services.AddSingleton<IConnectionMultiplexer>(sp =>
+        {
+            var config = $"{redisSettings!.Host}:{redisSettings.Port}";
+
+            return ConnectionMultiplexer.Connect(config);
         });
 
         services.AddSingleton<IConnection>(sp =>

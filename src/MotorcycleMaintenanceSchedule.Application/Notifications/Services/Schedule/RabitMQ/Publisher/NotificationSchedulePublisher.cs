@@ -1,10 +1,11 @@
-﻿using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
+﻿using MotorcycleMaintenanceSchedule.Application.Notifications.Interfaces.Schedule.Publisher;
+using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using NLog;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
 
-namespace MotorcycleMaintenanceSchedule.Application.Services.Internal.NotificationSchedule;
+namespace MotorcycleMaintenanceSchedule.Application.Notifications.Services.Schedule.RabitMQ.Publisher;
 
 public class NotificationSchedulePublisher : INotificationSchedulePublisher
 {

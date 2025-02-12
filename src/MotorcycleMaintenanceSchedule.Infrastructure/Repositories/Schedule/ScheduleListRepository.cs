@@ -2,7 +2,7 @@
 using MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
-using MotorcycleMaintenanceSchedule.Domain.Services.Iternal.Schedule.Queries.List;
+using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.List;
 using MotorcycleMaintenanceSchedule.Infrastructure.Database;
 using MotorcycleMaintenanceSchedule.Infrastructure.Repositories.BaseRepositories;
 

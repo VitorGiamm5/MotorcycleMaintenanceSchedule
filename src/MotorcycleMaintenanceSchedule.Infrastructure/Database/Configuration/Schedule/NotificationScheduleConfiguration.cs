@@ -14,10 +14,11 @@ public class NotificationScheduleConfiguration : IEntityTypeConfiguration<Notifi
 
         builder.Property(t => t.Id).HasColumnName("ID").IsRequired();
         builder.Property(t => t.ScheduleId).HasColumnName("ID_SCHEDULE").IsRequired();
-        builder.Property(t => t.MotorcyleId).HasColumnName("ID_MOTORCYCLE");
+        builder.Property(t => t.MotorcyleId).HasColumnName("ID_MOTORCYCLE").IsRequired(false);
         builder.Property(t => t.Name).HasColumnName("NAME").IsRequired();
-        builder.Property(t => t.ScheduleDate).HasColumnName("SCHEDULE_DATE");
+        builder.Property(t => t.Price).HasColumnName("PRICE").IsRequired();
+        builder.Property(t => t.ScheduleDate).HasColumnName("SCHEDULE_DATE").IsRequired(false);
         builder.Property(t => t.Status).HasColumnName("STATUS").IsRequired();
-        builder.Property(t => t.NotificationDate).HasColumnName("NOTIFICATION_DATE").IsRequired();
+        builder.Property(t => t.DateCreated).HasColumnName("DATE_CREATED").IsRequired().HasColumnType("timestamptz");
     }
 }

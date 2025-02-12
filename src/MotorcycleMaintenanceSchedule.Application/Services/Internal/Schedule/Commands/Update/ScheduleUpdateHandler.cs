@@ -13,13 +13,13 @@ public class ScheduleUpdateHandler : IRequestHandler<ScheduleUpdateCommand, Acti
         _scheduleRepository = scheduleRepository;
     }
 
-    public async Task<ActionResult> Handle(ScheduleUpdateCommand request, CancellationToken cancellationToken)
+    public async Task<ActionResult> Handle(ScheduleUpdateCommand command, CancellationToken cancellationToken)
     {
         var result = new ActionResult();
 
         try
         {
-            var schedule = await _scheduleRepository.GetById(request.Id);
+            var schedule = await _scheduleRepository.GetById(command.Id);
 
             if (schedule == null)
             {
@@ -28,20 +28,11 @@ public class ScheduleUpdateHandler : IRequestHandler<ScheduleUpdateCommand, Acti
                 return result;
             }
 
-            schedule.Name = request.Name;
-            schedule.Email = request.Email;
-            schedule.Phone = request.Phone;
-            schedule.PhoneDDD = request.PhoneDDD;
-            schedule.Observation = request.Observation;
-            schedule.Status = request.Status;
-            schedule.MotorcycleId = request.MotorcycleId;
-            schedule.StartBusinessHour = schedule.StartBusinessHour;
-            schedule.EndBusinessHour = request.EndBusinessHour;
-            schedule.DateLastUpdate = DateTime.UtcNow;
+            var updatedSchedule = ScheduleUpdateMappers.Map(command);
 
-            await _scheduleRepository.Update(schedule);
+            await _scheduleRepository.Update(updatedSchedule);
 
-            result.SetData(schedule);
+            result.SetData(updatedSchedule);
         }
         catch (Exception ex)
         {

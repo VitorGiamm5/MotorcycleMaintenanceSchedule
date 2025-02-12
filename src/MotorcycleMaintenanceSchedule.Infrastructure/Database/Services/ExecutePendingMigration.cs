@@ -6,7 +6,7 @@ namespace MotorcycleMaintenanceSchedule.Infrastructure.Database.Services;
 
 public static class ExecutePendingMigration
 {
-    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+    private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
     public static void Execute(IServiceCollection services)
     {
@@ -22,14 +22,14 @@ public static class ExecutePendingMigration
 
             if (migrations.Any())
             {
-                Logger.Debug($"Apply migrations success");
+                _logger.Debug($"Apply migrations success");
 
                 dbContext.Database.MigrateAsync().Wait();
             }
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, $"Error to apply migrations: {ex.Message}");
+            _logger.Error(ex, $"Error to apply migrations: {ex.Message}");
 
             throw;
         }
