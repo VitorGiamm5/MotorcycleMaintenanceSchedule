@@ -1,4 +1,4 @@
-﻿using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.List;
+﻿using MotorcycleMaintenanceSchedule.Domain.Services.Schedule.Queries.List;
 
 namespace MotorcycleMaintenanceSchedule.Domain.Entities.Schedule;
 

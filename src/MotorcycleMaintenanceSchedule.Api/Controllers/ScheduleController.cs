@@ -5,10 +5,6 @@ using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Comma
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Commands.Delete;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Commands.Update;
 using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.GetOne;
-using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.List;
-using MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.Summary;
-using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.List;
-using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.Summary;
 
 namespace MotorcycleMaintenanceSchedule.Api.Controllers;
 

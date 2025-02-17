@@ -22,9 +22,13 @@ public static class ExecutePendingMigration
 
             if (migrations.Any())
             {
-                _logger.Debug($"Apply migrations success");
-
                 dbContext.Database.MigrateAsync().Wait();
+
+                _logger.Debug($"Apply migrations success");
+            }
+            else
+            {
+                _logger.Debug($"No migrations to run");
             }
         }
         catch (Exception ex)

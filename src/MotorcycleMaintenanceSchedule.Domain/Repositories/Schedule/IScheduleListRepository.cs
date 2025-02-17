@@ -1,5 +1,5 @@
 ﻿using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
-using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.List;
+using MotorcycleMaintenanceSchedule.Domain.Services.Schedule.Queries.List;
 
 namespace MotorcycleMaintenanceSchedule.Domain.Repositories.Schedule;
 

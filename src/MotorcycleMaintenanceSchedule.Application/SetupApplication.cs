@@ -3,7 +3,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MotorcycleMaintenanceSchedule.Application.Cache.Interfaces;
-using MotorcycleMaintenanceSchedule.Application.Cache.Schedule;
+using MotorcycleMaintenanceSchedule.Application.Cache.Services.Schedule;
 using MotorcycleMaintenanceSchedule.Application.Notifications.Interfaces.Schedule.Publisher;
 using MotorcycleMaintenanceSchedule.Application.Notifications.Services.Schedule.RabitMQ.Consumer;
 using MotorcycleMaintenanceSchedule.Application.Notifications.Services.Schedule.RabitMQ.Publisher;

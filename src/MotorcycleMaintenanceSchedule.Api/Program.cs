@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components;
 using Microsoft.OpenApi.Models;
 using MotorcycleMaintenanceSchedule.Api.Converters;
 using MotorcycleMaintenanceSchedule.Api.Swagger;
@@ -32,24 +33,10 @@ builder.Services.AddSwaggerGen(c =>
         Title = $"Maintence schedule motorcycle API - {builder.Environment.EnvironmentName}",
         Version = "v1",
         Contact = new OpenApiContact() { Name = ": Send Email", Email = "vitorgiammella@gmail.com" },
-        Description = $"<b>ENVIRONMENT:<b/> {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}"
+        Description = $"<b>ENVIRONMENT:<b/> {builder.Environment.EnvironmentName}"
     });
     c.CustomSchemaIds(type => type.ToString());
     c.OperationFilter<DefaultValuesOperation>();
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
 });
 
 builder.Services.AddResponseCompression(options =>
@@ -99,7 +86,7 @@ app.UseResponseCompression();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.MapControllers().WithMetadata(new RouteAttribute("api/[controller]"));
 
 app.UseCors("AllowAll");
 

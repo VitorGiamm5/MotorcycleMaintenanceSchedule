@@ -4,7 +4,7 @@ using MotorcycleMaintenanceSchedule.Domain.Request.BaseRequest;
 using StackExchange.Redis;
 using System.Text.Json;
 
-namespace MotorcycleMaintenanceSchedule.Application.Cache.Schedule;
+namespace MotorcycleMaintenanceSchedule.Application.Cache.Services.Schedule;
 
 public class MotorcycleCacheService : IMotorcycleCacheService
 {
@@ -22,13 +22,13 @@ public class MotorcycleCacheService : IMotorcycleCacheService
     {
         var db = _redis.GetDatabase();
 
-        var motorcycleKey = $"{_prefix}-{schedule.ScheduleId}-{schedule.Date}";
+        var keyCache = $"{_prefix}:{schedule.ScheduleId}-{schedule.Date}";
 
         var jsonData = JsonSerializer.Serialize(schedule);
 
-        await db.StringSetAsync(motorcycleKey, jsonData);
+        await db.StringSetAsync(keyCache, jsonData);
 
-        await db.KeyExpireAsync(motorcycleKey, TimeSpan.FromDays(_expirationSchedulesDays));
+        await db.KeyExpireAsync(keyCache, TimeSpan.FromDays(_expirationSchedulesDays));
 
         if (autoUpdateSummary)
         {
@@ -40,7 +40,7 @@ public class MotorcycleCacheService : IMotorcycleCacheService
     {
         var db = _redis.GetDatabase();
 
-        var totalizerKey = $"{_prefix}-daily-{date}";
+        var totalizerKey = $"{_prefix}:daily-{date}";
 
         var data = await db.StringGetAsync(totalizerKey);
 
@@ -63,7 +63,7 @@ public class MotorcycleCacheService : IMotorcycleCacheService
 
         for (var inicialDate = date; inicialDate <= query.CreationDateEnd; inicialDate = date.AddDays(1))
         {
-            var keys = server.Keys(pattern: $"{_prefix}-*-{date}");
+            var keys = server.Keys(pattern: $"{_prefix}:*-{date}");
 
             foreach (var key in keys)
             {
@@ -90,7 +90,7 @@ public class MotorcycleCacheService : IMotorcycleCacheService
 
         var server = _redis.GetServer(_redis.GetEndPoints()[0]);
 
-        var keys = server.Keys(pattern: $"{_prefix}-{motorcycleId}-*");
+        var keys = server.Keys(pattern: $"{_prefix}:{motorcycleId}-*");
 
         var results = new List<ScheduleSummaryDto>();
 
@@ -116,7 +116,7 @@ public class MotorcycleCacheService : IMotorcycleCacheService
     {
         var db = _redis.GetDatabase();
 
-        var totalizerKey = $"{_prefix}-daily-{schedule.Date}";
+        var totalizerKey = $"{_prefix}:daily-{schedule.Date}";
 
         var existingData = await _redis.GetDatabase().StringGetAsync(totalizerKey);
 

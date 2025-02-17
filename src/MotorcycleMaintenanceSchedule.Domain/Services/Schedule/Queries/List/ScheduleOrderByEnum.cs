@@ -1,4 +1,4 @@
-﻿namespace MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.List;
+﻿namespace MotorcycleMaintenanceSchedule.Domain.Services.Schedule.Queries.List;
 
 public enum ScheduleOrderByEnum
 {

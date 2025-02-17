@@ -1,6 +1,6 @@
 ﻿using MotorcycleMaintenanceSchedule.Domain.Request.BaseRequest;
 
-namespace MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.Summary;
+namespace MotorcycleMaintenanceSchedule.Domain.Services.Schedule.Queries.Summary;
 
 public class ScheduleSummaryParams : BaseQueryParams
 {

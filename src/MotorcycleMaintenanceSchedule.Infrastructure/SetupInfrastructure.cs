@@ -20,7 +20,7 @@ namespace MotorcycleMaintenanceSchedule.Infrastructure;
 
 public static class SetupInfrastructure
 {
-    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+    private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
@@ -35,7 +35,7 @@ public static class SetupInfrastructure
                 sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
                 onRetry: (exception, timespan, attempt, context) =>
                 {
-                    Logger.Error(exception, $"Retry {attempt} fail with error. Lets try again in {timespan}.");
+                    _logger.Error(exception, $"Retry {attempt} fail with error. Lets try again in {timespan}.");
                 }
             );
 
@@ -79,15 +79,15 @@ public static class SetupInfrastructure
                 .Handle<Exception>()
                 .WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (exception, timeSpan, retryCount, context) =>
                 {
-                    Logger.Error(exception, $"Retry {retryCount} for RabbitMQ connection.");
+                    _logger.Error(exception, $"Retry {retryCount} for RabbitMQ connection.");
 
-                    Logger.Info(
+                    _logger.Info(
                         $"HostName: '{configuration["RabbitMQ:Host"]}'," +
                         $"UserName: '{configuration["RabbitMQ:Username"]}'," +
                         $"Password: '{configuration["RabbitMQ:Password"]}'," +
                         $"Port: '{configuration["RabbitMQ:Port"]}'");
 
-                    Logger.Info(
+                    _logger.Info(
                         $"Publish: '{configuration["RabbitMQ:QueuesName:MaintenanceSchedulePublishQueue"]}'," +
                         $"Consumer: '{configuration["RabbitMQ:QueuesName:MaintenanceScheduleConsumerQueue"]}'");
 

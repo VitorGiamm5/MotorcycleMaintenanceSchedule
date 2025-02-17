@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using MotorcycleMaintenanceSchedule.Domain.Response.BaseResponse;
-using MotorcycleMaintenanceSchedule.Domain.Services.Internal.Schedule.Queries.Summary;
+using MotorcycleMaintenanceSchedule.Domain.Services.Schedule.Queries.Summary;
 
 namespace MotorcycleMaintenanceSchedule.Application.Services.Internal.Schedule.Queries.Summary;
 
